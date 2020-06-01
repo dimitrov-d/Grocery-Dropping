@@ -1,0 +1,43 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="false">
+
+  <mdb-navbar-brand><a class="navbar-brand" href="#">
+      <i style='font-family:"Tangerine", cursive, sans-serif;'>GROCERY DROPPING</i></a></mdb-navbar-brand>
+
+  <links>
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item mx-auto">
+        <a class="nav-link waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="apple-alt"></mdb-icon> Browse Products
+        </a>
+      </li>
+      <li class="nav-item mx-auto">
+        <a class="nav-link waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="shopping-basket"></mdb-icon> Saved Orders
+        </a>
+      </li>
+      <li class="nav-item mx-auto">
+        <a class="nav-link waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="heart"></mdb-icon> Favorites
+        </a>
+      </li>
+      <li class="nav-item mx-auto">
+        <a class="nav-link waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="shopping-cart"></mdb-icon> My Cart
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto mr-3">
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">My Account</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+        </div>
+      </li>
+    </ul>
+
+  </links>
+
+</mdb-navbar>
