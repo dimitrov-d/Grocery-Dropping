@@ -6,7 +6,7 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
 export const ROUTES: Routes = [
   {
     path: '',
-    redirectTo: 'products',
+    redirectTo: '/products',
     pathMatch: 'full',
   },
   { path: 'products', component: ProductsComponent },
@@ -14,7 +14,7 @@ export const ROUTES: Routes = [
   { path: 'favorites', component: FavoritesComponent },
   {
     path: 'auth',
-    loadChildren: './auth/auth.module#AuthModule',
+    loadChildren: () => import('./auth/auth.module').then((a) => a.AuthModule),
   },
   { path: '**', redirectTo: '/products' },
 ];

@@ -20,11 +20,10 @@ import { AuthModule } from './auth/auth.module';
   ],
   imports: [
     BrowserModule,
-    MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(ROUTES),
+    MDBBootstrapModule.forRoot(),
     AuthModule
   ],
-  providers: [],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 })
