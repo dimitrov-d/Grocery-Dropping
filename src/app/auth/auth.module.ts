@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
 
-export const ROUTES: Routes = [
+export const AUTH_ROUTES: Routes = [
   {
-    path: '',
-    redirectTo: '/login',
+    path: 'auth',
+    redirectTo: 'auth/login',
     pathMatch: 'full',
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '**', redirectTo: '/' },
+  { path: 'account', component: AccountComponent },
 ];
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule.forChild(AUTH_ROUTES)],
   declarations: [
     AuthComponent,
     LoginComponent,
