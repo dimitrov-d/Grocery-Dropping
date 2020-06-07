@@ -1,23 +1,43 @@
-<form class="text-center border border-light p-5" action="#!" id="form">
+<form class="text-center border border-light p-5" [formGroup]="registerForm" id="form" (ngSubmit)="onSubmit()">
 
   <p class="h4 mb-4">Register</p>
 
   <div class="form-row mb-4">
     <div class="col">
-      <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+      <input type="text" class="form-control" placeholder="First Name" formControlName="firstName"
+        [ngClass]="{ 'is-invalid': submitted && controls.firstName.errors }" />
+      <div *ngIf="submitted && controls.firstName.errors" class="invalid-feedback">
+        <div *ngIf="controls.firstName.errors.required">First Name is required</div>
+      </div>
     </div>
     <div class="col">
-      <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+      <input type="text" class="form-control" placeholder="Last name" formControlName="lastName"
+        [ngClass]="{ 'is-invalid': submitted && controls.lastName.errors }" />
+      <div *ngIf="submitted && controls.lastName.errors" class="invalid-feedback">
+        <div *ngIf="controls.lastName.errors.required">Last Name is required</div>
+      </div>
     </div>
   </div>
 
-  <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+  <input type="email" class="form-control mb-4" placeholder="E-mail" formControlName="email"
+    [ngClass]="{ 'is-invalid': submitted && controls.email.errors }" />
+  <div *ngIf="submitted && controls.email.errors" class="invalid-feedback">
+    <div *ngIf="controls.email.errors.required">E-mail is required</div>
+  </div>
 
-  <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" placeholder="Password"
-    aria-describedby="defaultRegisterFormPasswordHelpBlock">
+  <input type="password" class="form-control mb-4" placeholder="Password" formControlName="password"
+    [ngClass]="{ 'is-invalid': submitted && controls.password.errors }" />
+  <div *ngIf="submitted && controls.password.errors" class="invalid-feedback">
+    <div *ngIf="controls.password.errors.required">Password is required</div>
+    <div *ngIf="controls.password.errors.minlength">Password must be at least 6 characters</div>
+  </div>
 
-  <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Phone number"
-    aria-describedby="defaultRegisterFormPhoneHelpBlock">
+  <input type="text" class="form-control" placeholder="Phone number" formControlName="phoneNum"
+    [ngClass]="{ 'is-invalid': submitted && controls.password.errors }" />
+  <div *ngIf="submitted && controls.password.errors" class="invalid-feedback">
+    <div *ngIf="controls.phoneNum.errors.required">Phone Number is required</div>
+    <div *ngIf="controls.phoneNum.errors.minlength">Phone Number must be at least 6 characters</div>
+  </div>
 
   <button class="btn btn-info my-4 btn-block" type="submit">Sign up</button>
 
