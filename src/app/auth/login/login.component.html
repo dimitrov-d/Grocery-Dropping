@@ -2,9 +2,17 @@
 
     <p class="h4 mb-4">Sign in</p>
 
-    <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail" id="email">
+    <input type="email" class="form-control mb-4" placeholder="E-mail" id="email" formControlName="email"
+      [ngClass]="{ 'is-invalid': submitted && controls.email.errors }" />
+    <div *ngIf="submitted && controls.email.errors" class="invalid-feedback">
+      <div *ngIf="controls.email.errors.required">Username is required</div>
+    </div>
 
-    <input type="password" class="form-control mb-4" placeholder="Password" id="pass">
+    <input type="password" class="form-control mb-4" placeholder="Password" id="pass" formControlName="password"
+      [ngClass]="{ 'is-invalid': submitted && controls.password.errors }" />
+    <div *ngIf="submitted && controls.password.errors" class="invalid-feedback">
+      <div *ngIf="controls.password.errors.required">Password is required</div>
+    </div>
 
     <div class="d-flex justify-content-around">
       <div>

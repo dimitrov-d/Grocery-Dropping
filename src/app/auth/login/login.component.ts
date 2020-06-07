@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
@@ -20,6 +19,9 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+  get controls() {
+    return this.loginForm.controls;
   }
 
   onSubmit() {}
