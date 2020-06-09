@@ -9,6 +9,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { ProductsComponent } from './components/products/products.component';
 import { AuthModule } from './auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AuthModule } from './auth/auth.module';
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     MDBBootstrapModule.forRoot(),
-    AuthModule
+    AuthModule,
+    HttpClientModule
   ],
   bootstrap: [AppComponent],
   exports: [RouterModule]
