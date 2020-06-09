@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   get controls() {
     return this.loginForm.controls;
@@ -51,7 +53,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         (error) => {
-          window.alert(error.text);
+          window.alert('Incorrect credentials, please try again');
           this.loading = false;
         }
       );

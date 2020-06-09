@@ -22,12 +22,12 @@ export class AuthenticationService {
 
   login(email: string, password: string) {
     return this.http
-      .post<any>(`/user/authorize`, { email, password })
+      .post<any>(`/user/login`, { email, password })
       .pipe(
         map((user) => {
-          // login successful if there's a jwt token in the response
+          // Login successful if there's a jwt token in the response
           if (user && user.token) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            // Store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
           }
@@ -38,12 +38,11 @@ export class AuthenticationService {
   }
 
   logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
 
   getUsers() {
-    return this.http.get<User[]>(`/user`);
+    return this.http.get<User[]>(`/users`);
   }
 }
