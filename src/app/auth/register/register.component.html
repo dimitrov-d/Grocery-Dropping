@@ -38,7 +38,12 @@
     <div *ngIf="controls.phoneNum.errors.required">Phone Number is required</div>
     <div *ngIf="controls.phoneNum.errors.minlength">Phone Number must be at least 6 characters</div>
   </div>
-
-  <button class="btn btn-info my-4 btn-block" type="submit">Sign up</button>
-
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary mt-4 btn-block" type="submit">Sign up</button>
+    </div>
+    <div class="col mt-4">
+      <a routerLink="/login">Cancel</a>
+    </div>
+  </div>
 </form>
