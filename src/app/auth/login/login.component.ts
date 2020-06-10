@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
          }, 3000);
         },
         (error) => {
-          window.alert('Incorrect credentials, please try again');
+          console.log(error.error.message)
           this.loading = false;
         }
       );
