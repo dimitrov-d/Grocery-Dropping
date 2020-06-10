@@ -21,10 +21,10 @@ export class BackendInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const { url, method, headers, body } = request;
 
-    // wrap in delayed observable to simulate server api call
+    // Wrap in delayed observable to simulate server api call
     return of(null)
       .pipe(mergeMap(handleRoute))
-      .pipe(materialize()) // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
+      .pipe(materialize()) // Call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
       .pipe(delay(500))
       .pipe(dematerialize());
 
@@ -39,7 +39,7 @@ export class BackendInterceptor implements HttpInterceptor {
         case url.match(/\/users\/\d+$/) && method === 'DELETE':
           return deleteUser();
         default:
-          // pass through any requests not handled above
+          // Pass through any requests not handled above
           return next.handle(request);
       }
     }
@@ -95,7 +95,7 @@ export class BackendInterceptor implements HttpInterceptor {
     }
 
     function unauthorized() {
-      return throwError({ status: 401, error: { message: 'Unauthorised' } });
+      return throwError({ status: 401, error: { message: 'Unauthorized' } });
     }
 
     function isLoggedIn() {
@@ -110,7 +110,7 @@ export class BackendInterceptor implements HttpInterceptor {
 }
 
 export const BackendProvider = {
-  // use  backend in place of Http service for backend-less development
+  // Use  backend in place of Http service for backend-less development
   provide: HTTP_INTERCEPTORS,
   useClass: BackendInterceptor,
   multi: true,

@@ -9,6 +9,7 @@ import { User } from 'src/app/models/user';
 })
 export class NavbarComponent {
   currentUser: User;
+  w = window
   constructor(private authService: AuthenticationService) {
     this.currentUser = this.authService.currentUserSubject.value || null;
   }
