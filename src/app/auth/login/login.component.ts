@@ -50,7 +50,10 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (data) => {
-          this.router.navigate([this.returnUrl]);
+          location.reload();
+         setTimeout(() => {
+           this.router.navigate([this.returnUrl]);
+         }, 3000);
         },
         (error) => {
           window.alert('Incorrect credentials, please try again');

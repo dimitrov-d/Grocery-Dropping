@@ -1,6 +1,6 @@
   <form class="text-center border border-light p-5" [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="form">
 
-    <p class="h4 mb-4">Sign in</p>
+    <p class="h4 mb-4"> Login</p>
 
     <input type="email" class="form-control mb-4" placeholder="E-mail" id="email" formControlName="email"
       [ngClass]="{ 'is-invalid': submitted && controls.email.errors }" />
@@ -26,8 +26,11 @@
       </div>
     </div>
 
-    <button class="btn btn-primary btn-block my-4">Sign in</button>
-
+    <button [disabled]="loading" class="btn btn-primary btn-block my-4">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      Sign in
+    </button>
+    
     <p>Not a member?
       <a routerLink="/register">Register</a>
     </p>
