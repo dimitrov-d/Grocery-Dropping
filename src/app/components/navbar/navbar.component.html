@@ -1,53 +1,52 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="false">
 
   <mdb-navbar-brand><a class="navbar-brand" routerLink="/">
-      <i style='font-family:"Tangerine", cursive, sans-serif;'>GROCERY DROPPING</i></a></mdb-navbar-brand>
+      <i style='font-family:"Tangerine", cursive, sans-serif; font-size: 1.50rem;'>GROCERY DROPPING</i></a>
+  </mdb-navbar-brand>
 
   <links>
-    <ul class="navbar-nav mx-auto">
+    <ul class="navbar-nav mx-auto" *ngIf="currentUser">
       <li class="nav-item mx-auto">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="products" *ngIf="currentUser">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="products">
           <mdb-icon fas icon="apple-alt"></mdb-icon> Browse Products
         </a>
       </li>
       <li class="nav-item mx-auto">
-        <a class="nav-link waves-light" mdbWavesEffect *ngIf="currentUser">
+        <a class="nav-link waves-light" mdbWavesEffect>
           <mdb-icon fas icon="shopping-basket"></mdb-icon> Saved Orders
         </a>
       </li>
       <li class="nav-item mx-auto">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="favorites" *ngIf="currentUser">
-          <mdb-icon fas icon="heart"></mdb-icon> Favorites
-        </a>
-      </li>
-      <li class="nav-item mx-auto">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="cart" *ngIf="currentUser">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="cart">
           <mdb-icon fas icon="shopping-cart"></mdb-icon> My Cart
         </a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto mr-3" *ngIf="currentUser">
-      <li class="nav-item dropdown" dropdown>
+    <ul class="navbar-nav mr-3" *ngIf="currentUser">
+      <li class="nav-item dropdown ml-auto" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           <mdb-icon fas icon="user"></mdb-icon>Profile<span class="caret"></span>
         </a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu"
-          [ngClass]="{'dropdown-menu dropdown dropdown-primary dropdown-menu-right': w.innerWidth > 990}">
-          <b><span class="dropdown-item" style="color: #4285F4"> {{currentUser.firstName}}
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary dropdown-menu-right" role="menu">
+          <b><span class="dropdown-item" style="color: #4285F4">
+              {{currentUser.firstName}}
               {{currentUser.lastName}}</span></b>
+          <span class="dropdown-header" style="color: #4285F4"> {{currentUser.email}}
+          </span>
+          <div class="dropdown-divider"></div>
           <a class="dropdown-item waves-light" mdbWavesEffect routerLink="account">My Account</a>
           <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Log out</a>
         </div>
       </li>
     </ul>
 
-    <ul class="navbar-nav" *ngIf="!currentUser">
-      <li class="nav-item mx-auto">
+    <ul class="navbar-nav ml-auto" *ngIf="!currentUser">
+      <li class="nav-item ml-auto mr-3">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/login">
           Login
         </a>
       </li>
-      <li class="nav-item mx-auto">
+      <li class="nav-item ml-auto mr-3">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/register">
           Register
         </a>
