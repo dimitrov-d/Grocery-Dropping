@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
@@ -10,6 +10,10 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
 import { ProductsComponent } from './components/products/products.component';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import localeSl from '@angular/common/locales/sl';
+
+registerLocaleData(localeSl, 'sl');
 
 @NgModule({
   declarations: [
@@ -24,9 +28,10 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule.forRoot(ROUTES),
     MDBBootstrapModule.forRoot(),
     AuthModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   bootstrap: [AppComponent],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [{ provide: LOCALE_ID, useValue: 'sl' }],
 })
 export class AppModule {}
