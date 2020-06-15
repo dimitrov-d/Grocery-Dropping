@@ -2,24 +2,26 @@
   <div class="col-3">
     <div class="sticky-top mt-2 ml-3">
       <div class="list-group">
-        <a class="list-group-item-action list-group-item">
-          All Categories
-        </a>
-        <a *ngFor="let c of categories" class="list-group-item list-group-item-action">{{c}}
+        <a *ngFor="let category of categories" class="list-group-item list-group-item-action" (click)="filterByCategory(category)">{{category}}
         </a>
       </div>
     </div>
   </div>
   <div class="col-9">
-    <div class="row">
-      <ng-container *ngFor="let product of products; let i = index">
+    <div class="row mr-1">
+      <ng-container *ngFor="let product of filteredProducts">
         <div class="col-3 my-3">
           <div *ngIf="product.title" class="card" my-2>
             <img *ngIf="product.imageUrl" class="card-img-top" style="height: 250px" src="{{ product.imageUrl }}"
               alt="{{ product.title }}">
             <div class="card-body">
               <h2 class="card-title">{{product.title}}</h2>
-              <mdb-icon class="icon" style="float: right; color: red" far icon="heart fa-3x"></mdb-icon>
+              <a (click)="toggleHeart(product.id)">
+                <mdb-icon *ngIf="!product.favorited" class="icon" style="float: right; color: red" far
+                  icon="heart fa-3x"></mdb-icon>
+                <mdb-icon *ngIf="product.favorited" class="icon" style="float: right; color: red" fas
+                  icon="heart fa-3x"></mdb-icon>
+              </a>
               <h5>{{product.supermarket}}</h5>
               <p class="card-text">{{product.price | currency:'EUR':'symbol'}}</p>
             </div>

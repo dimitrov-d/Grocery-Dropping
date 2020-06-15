@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { products } from '../../../assets/products';
+import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-products',
@@ -7,10 +8,37 @@ import { products } from '../../../assets/products';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  products = products;
-  categories = ['Bread', 'Dairy', 'Fruits'];
-  constructor() {}
+  products: Product[];
+  filteredProducts: Product[];
+  categories = [
+    'All Categories',
+    'Bread',
+    'Dairy',
+    'Fruits',
+    'Vegetables',
+    'Favorites',
+  ];
+  constructor() {
+    this.products = products;
+    this.filteredProducts = products;
+  }
 
   ngOnInit() {}
 
+  toggleHeart(index) {
+    this.products[index - 1].favorited = !this.products[index - 1].favorited;
+  }
+
+  filterByCategory(category) {
+    switch (category) {
+      case 'All Categories': {
+        this.filteredProducts = this.products;
+        break;
+      }
+      case 'Favorites': {
+        this.filteredProducts = this.products.filter((p) => p.favorited);
+        break;
+      }
+    }
+  }
 }
