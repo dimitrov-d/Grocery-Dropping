@@ -8,7 +8,9 @@ import { products } from '../../../assets/products';
 })
 export class ProductsComponent implements OnInit {
   products = products;
+  categories = ['Bread', 'Dairy', 'Fruits'];
   constructor() {}
 
   ngOnInit() {}
+
 }
