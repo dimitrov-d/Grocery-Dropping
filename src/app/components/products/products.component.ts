@@ -9,7 +9,6 @@ import { Product } from 'src/app/models/product';
 })
 export class ProductsComponent implements OnInit {
   products: Product[];
-  filteredProducts: Product[];
   categories = [
     'All Categories',
     'Bread',
@@ -20,23 +19,27 @@ export class ProductsComponent implements OnInit {
   ];
   constructor() {
     this.products = products;
-    this.filteredProducts = products;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (localStorage.getItem('products')) {
+      this.products = JSON.parse(localStorage.getItem('products'));
+    }
+  }
 
   toggleHeart(index) {
     this.products[index - 1].favorited = !this.products[index - 1].favorited;
+    localStorage.setItem('products', JSON.stringify(this.products));
   }
 
   filterByCategory(category) {
     switch (category) {
       case 'All Categories': {
-        this.filteredProducts = this.products;
+        this.products = products;
         break;
       }
       case 'Favorites': {
-        this.filteredProducts = this.products.filter((p) => p.favorited);
+        this.products = this.products.filter((p) => p.favorited);
         break;
       }
     }
@@ -44,10 +47,8 @@ export class ProductsComponent implements OnInit {
 
   filterProducts(filter: string) {
     if (!filter) {
-      this.filteredProducts = this.products;
+      this.products = products;
     }
-    this.filteredProducts = this.filteredProducts.filter((p) =>
-      p.title.includes(filter)
-    );
+    this.products = this.products.filter((p) => p.title.includes(filter));
   }
 }
