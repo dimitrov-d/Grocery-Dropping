@@ -41,4 +41,13 @@ export class ProductsComponent implements OnInit {
       }
     }
   }
+
+  filterProducts(filter: string) {
+    if (!filter) {
+      this.filteredProducts = this.products;
+    }
+    this.filteredProducts = this.filteredProducts.filter((p) =>
+      p.title.includes(filter)
+    );
+  }
 }

@@ -2,9 +2,12 @@
   <div class="col-3">
     <div class="sticky-top mt-2 ml-3">
       <div class="list-group">
-        <a *ngFor="let category of categories" class="list-group-item list-group-item-action" (click)="filterByCategory(category)">{{category}}
+        <a *ngFor="let category of categories" class="list-group-item list-group-item-action"
+          (click)="filterByCategory(category)">{{category}}
         </a>
       </div>
+      <input class="form-control mt-4" type="text" placeholder="Search for a product" aria-label="Search"
+        (input)="filterProducts($event.target.value)">
     </div>
   </div>
   <div class="col-9">
@@ -15,14 +18,14 @@
             <img *ngIf="product.imageUrl" class="card-img-top" style="height: 250px" src="{{ product.imageUrl }}"
               alt="{{ product.title }}">
             <div class="card-body">
-              <h2 class="card-title">{{product.title}}</h2>
+              <h4 class="card-title title">{{product.title}}</h4>
               <a (click)="toggleHeart(product.id)">
                 <mdb-icon *ngIf="!product.favorited" class="icon" style="float: right; color: red" far
                   icon="heart fa-3x"></mdb-icon>
                 <mdb-icon *ngIf="product.favorited" class="icon" style="float: right; color: red" fas
                   icon="heart fa-3x"></mdb-icon>
               </a>
-              <h5>{{product.supermarket}}</h5>
+              <h6 style="font-style: italic;">{{product.supermarket}}</h6>
               <p class="card-text">{{product.price | currency:'EUR':'symbol'}}</p>
             </div>
             <div class="card-footer">
