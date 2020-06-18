@@ -11,6 +11,9 @@ import { ProductsComponent } from './components/products/products.component';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
 import localeSl from '@angular/common/locales/sl';
 
 registerLocaleData(localeSl, 'sl');
@@ -29,6 +32,8 @@ registerLocaleData(localeSl, 'sl');
     MDBBootstrapModule.forRoot(),
     AuthModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
   ],
   bootstrap: [AppComponent],
   exports: [RouterModule],
