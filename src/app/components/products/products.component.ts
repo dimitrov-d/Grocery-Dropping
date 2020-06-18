@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { products } from '../../../assets/products';
 import { Product } from 'src/app/models/product';
-import { Category} from 'src/app/models/category'
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-products',
@@ -9,7 +10,7 @@ import { Category} from 'src/app/models/category'
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  products: Product[];
+  products: Observable<any[]>;
   categories = [
     'All Categories',
     'Bread',
@@ -18,38 +19,39 @@ export class ProductsComponent implements OnInit {
     'Vegetables',
     'Favorites',
   ];
-  constructor() {
-    this.products = products;
+  constructor(private db: AngularFirestore) {
+    this.products = db.collection('/products').valueChanges();
   }
 
-  ngOnInit() {
-    if (localStorage.getItem('products')) {
-      this.products = JSON.parse(localStorage.getItem('products'));
-    }
-  }
+  ngOnInit() {}
 
-  toggleHeart(index) {
-    this.products[index - 1].favorited = !this.products[index - 1].favorited;
-    localStorage.setItem('products', JSON.stringify(this.products));
+  async toggleHeart(index) {
+    let docRef = this.db.collection('/products').doc(index.toString());
+    let data = (await docRef.get().toPromise()).data();
+    this.db
+      .collection('/products')
+      .doc(index.toString())
+      .update({ favorited: !data.favorited });
   }
 
   filterByCategory(category) {
     switch (category) {
       case 'All Categories': {
-        this.products = products;
+        this.products = this.db.collection('/products').valueChanges();
         break;
       }
       case 'Favorites': {
-        this.products = this.products.filter((p) => p.favorited);
+        this.products = this.db
+          .collection('/products', (prod) =>
+            prod.where('favorited', '==', 'true')
+          )
+          .valueChanges();
         break;
       }
     }
   }
 
   filterProducts(filter: string) {
-    if (!filter) {
-      this.products = products;
-    }
-    this.products = this.products.filter((p) => p.title.includes(filter));
+    this.products = this.db.collection('/products').valueChanges();
   }
 }

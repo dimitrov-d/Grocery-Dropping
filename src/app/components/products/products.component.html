@@ -14,14 +14,14 @@
   </div>
   <div class="col">
     <div class="row mr-1">
-      <ng-container *ngFor="let product of products">
+      <ng-container *ngFor="let product of products | async; index as i">
         <div class="colDiv col-sm-6 col-md-4 col-lg-3 my-3">
-          <div *ngIf="product.title" class="card" my-2>
-            <img *ngIf="product.imageUrl" class="card-img-top" style="height: 250px" src="{{ product.imageUrl }}"
-              alt="{{ product.title }}">
+          <div *ngIf="product.name" class="card" my-2>
+            <img *ngIf="product.imgUrl" class="card-img-top" style="height: 250px" src="{{ product.imgUrl }}"
+              alt="{{ product.name }}">
             <div class="card-body">
-              <h4 class="card-title title">{{product.title}}</h4>
-              <a (click)="toggleHeart(product.id)">
+              <h4 class="card-title title">{{product.name}}</h4>
+              <a (click)="toggleHeart(i+1)">
                 <mdb-icon *ngIf="!product.favorited" class="icon" style="float: right; color: red" far
                   icon="heart fa-3x"></mdb-icon>
                 <mdb-icon *ngIf="product.favorited" class="icon" style="float: right; color: red" fas
