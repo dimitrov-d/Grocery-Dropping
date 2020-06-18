@@ -1,10 +1,11 @@
 import { Product } from 'src/app/models/product';
+import { Category } from 'src/app/models/category';
 
 export const products: Product[] = [
   {
     id: 1,
     title: 'Bread',
-    category: 'bread',
+    category: Category.Bread,
     price: 0.8,
     supermarket: 'Lidl',
     imageUrl:
@@ -14,7 +15,7 @@ export const products: Product[] = [
   {
     id: 2,
     title: 'Red Apples',
-    category: 'fruit',
+    category: Category.Fruits,
     price: 0.8,
     supermarket: 'Mercator',
     imageUrl:
@@ -24,7 +25,7 @@ export const products: Product[] = [
   {
     id: 3,
     title: 'Green Apples',
-    category: 'fruit',
+    category: Category.Fruits,
     price: 0.8,
     supermarket: 'Lidl',
     imageUrl:
@@ -34,7 +35,7 @@ export const products: Product[] = [
   {
     id: 4,
     title: 'bread',
-    category: 'bread',
+    category: Category.Bread,
     price: 0.8,
     supermarket: 'Lidl',
     imageUrl:
@@ -44,7 +45,7 @@ export const products: Product[] = [
   {
     id: 5,
     title: 'bread',
-    category: 'bread',
+    category: Category.Bread,
     price: 0.8,
     supermarket: 'Lidl',
     imageUrl:
@@ -54,17 +55,7 @@ export const products: Product[] = [
   {
     id: 6,
     title: 'bread',
-    category: 'bread',
-    price: 0.8,
-    supermarket: 'Lidl',
-    imageUrl:
-      'https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    favorited: false,
-  },
-  {
-    id: 7,
-    title: 'bread',
-    category: 'bread',
+    category: Category.Bread,
     price: 0.8,
     supermarket: 'Lidl',
     imageUrl:
