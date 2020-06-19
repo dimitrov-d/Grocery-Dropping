@@ -1,29 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { products } from '../../../assets/products';
-import { Product } from 'src/app/models/product';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/internal/Observable';
-
+import { Category } from 'src/app/models/category';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   products: Observable<any[]>;
-  categories = [
-    'All Categories',
-    'Bread',
-    'Dairy',
-    'Fruits',
-    'Vegetables',
-    'Favorites',
-  ];
-  constructor(private db: AngularFirestore) {
-    this.products = db.collection('/products').valueChanges();
-  }
+  categories = Object.values(Category);
 
-  ngOnInit() {}
+  constructor(private db: AngularFirestore) {
+    this.products = this.getProducts();
+  }
 
   async toggleHeart(index) {
     let docRef = this.db.collection('/products').doc(index.toString());
@@ -35,23 +25,28 @@ export class ProductsComponent implements OnInit {
   }
 
   filterByCategory(category) {
-    switch (category) {
-      case 'All Categories': {
-        this.products = this.db.collection('/products').valueChanges();
-        break;
-      }
-      case 'Favorites': {
-        this.products = this.db
-          .collection('/products', (prod) =>
-            prod.where('favorited', '==', 'true')
-          )
-          .valueChanges();
-        break;
-      }
+    if (category == Category.All) {
+      this.products = this.getProducts();
+    } else {
+      this.products = this.db
+        .collection('/products', (prod) =>
+          prod.where('category', '==', category)
+        )
+        .valueChanges();
     }
   }
 
   filterProducts(filter: string) {
-    this.products = this.db.collection('/products').valueChanges();
+    if (!filter) {
+      this.products = this.getProducts();
+    } else {
+      this.products = this.db
+        .collection('/products', (prod) => prod.where('name', '==', filter))
+        .valueChanges();
+    }
+  }
+
+  getProducts() {
+    return this.db.collection('/products').valueChanges();
   }
 }

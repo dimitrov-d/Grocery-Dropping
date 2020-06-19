@@ -1,9 +1,7 @@
 <div class="row">
-  <div class="col-3">
+  <div class="colDiv col-sm-1 col-md-2 col-lg-3 my-3">
     <div class="sticky-top mt-2 ml-3">
       <div class="list-group">
-        <a class="list-group-item list-group-item-action">All Categories
-        </a>
         <a *ngFor="let category of categories" class="list-group-item list-group-item-action"
           (click)="filterByCategory(category)">{{category}}
         </a>
