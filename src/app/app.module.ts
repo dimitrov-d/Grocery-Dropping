@@ -6,7 +6,6 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { ROUTES } from './app.routing';
 import { RouterModule } from '@angular/router';
 import { CartComponent } from './components/cart/cart.component';
-import { FavoritesComponent } from './components/favorites/favorites.component';
 import { ProductsComponent } from './components/products/products.component';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,7 +22,6 @@ registerLocaleData(localeSl, 'sl');
     AppComponent,
     NavbarComponent,
     CartComponent,
-    FavoritesComponent,
     ProductsComponent,
   ],
   imports: [
