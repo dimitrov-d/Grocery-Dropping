@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { Category } from 'src/app/models/category';
@@ -10,9 +10,11 @@ import { Category } from 'src/app/models/category';
 export class ProductsComponent {
   products: Observable<any[]>;
   categories = Object.values(Category);
+  current_categ: string;
 
   constructor(private db: AngularFirestore) {
     this.products = this.getProducts();
+    this.current_categ = Category.All;
   }
 
   async toggleHeart(index) {
@@ -25,8 +27,13 @@ export class ProductsComponent {
   }
 
   filterByCategory(category) {
+    this.current_categ = category;
     if (category == Category.All) {
       this.products = this.getProducts();
+    } else if (category == Category.Favorites) {
+      this.products = this.products = this.db
+        .collection('/products', (prod) => prod.where('favorited', '==', true))
+        .valueChanges();
     } else {
       this.products = this.db
         .collection('/products', (prod) =>
