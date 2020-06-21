@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <h1 class="mb-4"> Shopping Cart</h1>
-  <div class="row col-10">
+  <div class="row colDiv col-sm-6 col-md-10 col-lg-12 my-3">
     <p>
       You have {{ total }} items in your shopping cart.
     </p>
@@ -37,7 +37,7 @@
           <th></th>
           <th></th>
           <th class="text-right">
-            {{ 15 | currency:'EUR':'symbol'}}
+            {{ totalPrice| currency:'EUR':'symbol'}}
           </th>
         </tr>
       </tfoot>

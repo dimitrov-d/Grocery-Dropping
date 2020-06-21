@@ -46,7 +46,6 @@ export class QuantityComponent implements OnInit{
   }
 
   getQuantity(product: Product) {
-    console.log(product);
     let name = product.name;
     this.db
       .collection('/cart', (ref) => ref.where('name', '==', name))
