@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { Category } from 'src/app/models/category';
+import { Product } from 'src/app/models/product';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -55,5 +56,17 @@ export class ProductsComponent {
 
   getProducts() {
     return this.db.collection('/products').valueChanges();
+  }
+
+  addToCart(product: Product) {
+    let data = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      imgUrl: product.imgUrl,
+      quantity: 1,
+    };
+
+    this.db.collection('/cart').doc(product.id.toString()).set(data);
   }
 }
