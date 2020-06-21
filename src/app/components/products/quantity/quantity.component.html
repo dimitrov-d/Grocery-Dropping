@@ -1,0 +1,11 @@
+<div class="row no-gutters">
+  <div class="col-2">
+    <button (click)="decreaseQuantity(product)" class="btn btn-danger btn-block">-</button>
+  </div>
+  <div class="col text-center">
+    {{ quantity }} in cart
+  </div>
+  <div class="col-2">
+    <button (click)="increaseQuantity(product)" class="btn btn-success btn-block">+</button>
+  </div>
+</div>

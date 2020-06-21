@@ -14,6 +14,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import localeSl from '@angular/common/locales/sl';
+import { QuantityComponent } from './components/products/quantity/quantity.component';
 
 registerLocaleData(localeSl, 'sl');
 
@@ -23,6 +24,7 @@ registerLocaleData(localeSl, 'sl');
     NavbarComponent,
     CartComponent,
     ProductsComponent,
+    QuantityComponent
   ],
   imports: [
     BrowserModule,
