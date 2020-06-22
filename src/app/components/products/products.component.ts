@@ -3,6 +3,8 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -13,7 +15,7 @@ export class ProductsComponent {
   categories = Object.values(Category);
   current_categ: string;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private toastr: ToastrService) {
     this.products = this.getProducts();
     this.current_categ = Category.All;
   }
@@ -68,5 +70,6 @@ export class ProductsComponent {
     };
 
     this.db.collection('/cart').doc(product.id.toString()).set(data);
+    this.toastr.success('Product successfully added to cart', 'Success');
   }
 }
