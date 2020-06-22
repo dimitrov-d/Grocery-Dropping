@@ -43,6 +43,7 @@
       </tfoot>
     </table>
 
-    <a *ngIf="cart_items" routerLink="/check-out" class="btn btn-primary mt-2">Check Out</a>
+    <a *ngIf="total!==0" routerLink="" class="btn btn-primary mt-2 mr-4">Check Out</a>
+    <a *ngIf="total!==0" routerLink="" class="btn btn-danger mt-2" (click)="cleartCart()">Clear Cart</a>
   </div>
 </div>

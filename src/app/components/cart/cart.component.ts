@@ -33,4 +33,14 @@ export class CartComponent {
     }
     this.totalPrice = current_price;
   }
+
+  cleartCart() {
+    this.db.collection('cart')
+      .get().toPromise()
+      .then((res) => {
+        res.forEach((product) => {
+          product.ref.delete();
+        });
+      });
+  }
 }
