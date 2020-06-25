@@ -32,6 +32,13 @@
     <div *ngIf="controls.password.errors.minlength">Password must be at least 6 characters</div>
   </div>
 
+  <input type="text" class="form-control" placeholder="Address" formControlName="address"
+    [ngClass]="{ 'is-invalid': submitted && controls.address.errors }" />
+  <div *ngIf="submitted && controls.address.errors" class="invalid-feedback">
+    <div *ngIf="controls.address.errors.required">Address Number is required</div>
+    <div *ngIf="controls.address.errors.minlength">Address must be at least 6 characters</div>
+  </div>
+
   <input type="number" class="form-control mb-4" placeholder="Phone number" formControlName="phoneNum"
     [ngClass]="{ 'is-invalid': submitted && controls.phoneNum.errors }" />
   <div *ngIf="submitted && controls.phoneNum.errors" class="invalid-feedback">
@@ -39,12 +46,6 @@
     <div *ngIf="controls.phoneNum.errors.minlength">Phone Number must be at least 6 characters</div>
   </div>
 
-  <input type="text" class="form-control" placeholder="Address" formControlName="address"
-    [ngClass]="{ 'is-invalid': submitted && controls.address.errors }" />
-  <div *ngIf="submitted && controls.address.errors" class="invalid-feedback">
-    <div *ngIf="controls.address.errors.required">Address Number is required</div>
-    <div *ngIf="controls.address.errors.minlength">Address must be at least 6 characters</div>
-  </div>
 
   <div class="row">
     <div class="col">

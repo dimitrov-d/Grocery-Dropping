@@ -18,6 +18,7 @@ import { QuantityComponent } from './components/products/quantity/quantity.compo
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 registerLocaleData(localeSl, 'sl');
 
@@ -28,7 +29,7 @@ registerLocaleData(localeSl, 'sl');
     CartComponent,
     ProductsComponent,
     QuantityComponent,
-    CheckoutComponent
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,9 +41,10 @@ registerLocaleData(localeSl, 'sl');
     AngularFirestoreModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
+    ReactiveFormsModule,
   ],
   bootstrap: [AppComponent],
   exports: [RouterModule],
-  providers: [{ provide: LOCALE_ID, useValue: 'sl' }],
+  providers: [{ provide: LOCALE_ID, useValue: 'sl' }, FormBuilder],
 })
 export class AppModule {}
