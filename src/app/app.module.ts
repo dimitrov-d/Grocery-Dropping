@@ -19,6 +19,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ModalComponent } from './components/modal/modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(localeSl, 'sl');
 
@@ -30,6 +32,7 @@ registerLocaleData(localeSl, 'sl');
     ProductsComponent,
     QuantityComponent,
     CheckoutComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ registerLocaleData(localeSl, 'sl');
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
     ReactiveFormsModule,
+    NgbModule,
   ],
   bootstrap: [AppComponent],
   exports: [RouterModule],
