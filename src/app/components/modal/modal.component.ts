@@ -10,7 +10,14 @@ export class ModalComponent implements OnInit {
   pickup = false;
   text = 'Please choose your desired option of order receival';
   myDate: any;
-  constructor(private cart: CartService) {}
+  date: Object;
+  constructor(private cart: CartService) {
+    var currentTime = new Date();
+    var month = currentTime.getMonth() + 1;
+    var day = currentTime.getDate();
+    var year = currentTime.getFullYear();
+    this.date = { year: year, month: month, day: day };
+  }
 
   ngOnInit() {}
 

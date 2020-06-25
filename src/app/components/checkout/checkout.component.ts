@@ -69,4 +69,8 @@ export class CheckoutComponent implements OnInit {
     this.checkoutForm.get('email').setValue(this.currentUser.email);
     this.checkoutForm.get('phoneNum').setValue(this.currentUser.phoneNum);
   }
+
+  placeOrder() {
+    this.cart.completeOrder();
+  }
 }
