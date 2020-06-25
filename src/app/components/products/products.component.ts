@@ -5,6 +5,7 @@ import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-products',
@@ -15,17 +16,23 @@ export class ProductsComponent {
   products: Observable<any[]>;
   categories = Object.values(Category);
   current_categ: string;
+  currentUser: User;
 
   constructor(
     private db: AngularFirestore,
     private toastr: ToastrService,
-    private userS: AuthenticationService
+    private authService: AuthenticationService
   ) {
     this.products = this.getProducts();
     this.current_categ = Category.All;
+    this.currentUser = this.authService.currentUserSubject.value || null;
   }
 
   async toggleHeart(index) {
+    if (!this.currentUser) {
+      this.toastr.error('You must be logged in to continue!', 'Error');
+      return;
+    }
     let docRef = this.db.collection('/products').doc(index.toString());
     let data = (await docRef.get().toPromise()).data();
     this.db
@@ -66,6 +73,11 @@ export class ProductsComponent {
   }
 
   addToCart(product: Product) {
+    if (!this.currentUser) {
+      this.toastr.error('You must be logged in to continue!', 'Error');
+      return;
+    }
+
     let data = {
       id: product.id,
       name: product.name,

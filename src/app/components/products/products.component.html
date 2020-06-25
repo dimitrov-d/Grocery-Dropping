@@ -21,10 +21,11 @@
             <div class="card-body">
               <h4 class="card-title title">{{product.name}}</h4>
               <a (click)="toggleHeart(product.id)">
-                <mdb-icon *ngIf="!product.favorited" class="icon" style="float: right; color: red" far
-                  icon="heart fa-3x"></mdb-icon>
-                <mdb-icon *ngIf="product.favorited" class="icon" style="float: right; color: red" fas
-                  icon="heart fa-3x"></mdb-icon>
+                <mdb-icon *ngIf="!product.favorited || !currentUser; else fullHeart" class="icon"
+                  style="float: right; color: red" far icon="heart fa-3x"></mdb-icon>
+                <ng-template #fullHeart>
+                  <mdb-icon class="icon" style="float: right; color: red" fas icon="heart fa-3x"></mdb-icon>
+                </ng-template>
               </a>
               <h6>{{product.supermarket}}</h6>
               <p class="card-text">{{product.price | currency:'EUR':'symbol'}}</p>
