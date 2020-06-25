@@ -17,6 +17,7 @@ import localeSl from '@angular/common/locales/sl';
 import { QuantityComponent } from './components/products/quantity/quantity.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 registerLocaleData(localeSl, 'sl');
 
@@ -27,6 +28,7 @@ registerLocaleData(localeSl, 'sl');
     CartComponent,
     ProductsComponent,
     QuantityComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
