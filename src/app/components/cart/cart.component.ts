@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -12,18 +13,14 @@ export class CartComponent {
   total: number;
   totalPrice: number;
 
-  constructor(private db: AngularFirestore) {
-    this.cart_items = this.getItems();
+  constructor(private db: AngularFirestore, private cart: CartService) {
+    this.cart_items = this.cart.getItems();
     db.collection('/cart')
       .valueChanges()
       .subscribe((products) => {
         this.updateTotalPrice(products);
         this.total = products.length;
       });
-  }
-
-  getItems() {
-    return this.db.collection('/cart').valueChanges();
   }
 
   updateTotalPrice(products: any) {
@@ -35,12 +32,7 @@ export class CartComponent {
   }
 
   cleartCart() {
-    this.db.collection('cart')
-      .get().toPromise()
-      .then((res) => {
-        res.forEach((product) => {
-          product.ref.delete();
-        });
-      });
+    this.cart.cleartCart();
   }
+
 }
