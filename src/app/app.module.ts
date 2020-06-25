@@ -6,7 +6,6 @@ import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 import { ROUTES } from './app.routing';
 import { RouterModule } from '@angular/router';
 import { CartComponent } from './components/cart/cart.component';
-import { FavoritesComponent } from './components/favorites/favorites.component';
 import { ProductsComponent } from './components/products/products.component';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,6 +14,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import localeSl from '@angular/common/locales/sl';
+import { QuantityComponent } from './components/products/quantity/quantity.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeSl, 'sl');
 
@@ -23,8 +25,8 @@ registerLocaleData(localeSl, 'sl');
     AppComponent,
     NavbarComponent,
     CartComponent,
-    FavoritesComponent,
     ProductsComponent,
+    QuantityComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,8 @@ registerLocaleData(localeSl, 'sl');
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   exports: [RouterModule],

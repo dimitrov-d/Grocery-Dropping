@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,14 +10,17 @@ import { User } from 'src/app/models/user';
 })
 export class NavbarComponent {
   currentUser: User;
-  w = window
-  constructor(private authService: AuthenticationService) {
+  constructor(
+    private authService: AuthenticationService,
+    private cart: CartService
+  ) {
     this.currentUser = this.authService.currentUserSubject.value || null;
   }
 
   logout() {
     location.reload();
     setTimeout(() => {
+      this.cart.cleartCart();
       this.currentUser = null;
     }, 1000);
     this.authService.logout();

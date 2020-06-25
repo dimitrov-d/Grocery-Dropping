@@ -30,7 +30,7 @@
               <p class="card-text">{{product.price | currency:'EUR':'symbol'}}</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-block btn-secondary">Add to Cart</button>
+              <button (click)="addToCart(product)" class="btn btn-block btn-secondary">Add to Cart</button>
             </div>
           </div>
         </div>

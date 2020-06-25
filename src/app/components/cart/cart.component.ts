@@ -1,15 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
-export class CartComponent implements OnInit {
+export class CartComponent {
+  cart_items: Observable<any[]>;
+  total: number;
+  totalPrice: number;
 
-  constructor() { }
+  constructor(private db: AngularFirestore, private cart: CartService) {
+    this.cart_items = this.cart.getItems();
+    db.collection('/cart')
+      .valueChanges()
+      .subscribe((products) => {
+        this.updateTotalPrice(products);
+        this.total = products.length;
+      });
+  }
 
-  ngOnInit() {
+  updateTotalPrice(products: any) {
+    var current_price = 0;
+    for (var i = 0; i < products.length; i++) {
+      current_price += products[i].quantity * products[i].price;
+    }
+    this.totalPrice = current_price;
+  }
+
+  cleartCart() {
+    this.cart.cleartCart();
   }
 
 }

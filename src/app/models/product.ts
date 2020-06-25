@@ -2,10 +2,10 @@ import { Category } from './category';
 
 export class Product {
   id: number;
-  title: string;
+  name: string;
   category: Category;
   price: number;
   supermarket: string;
-  imageUrl: string;
+  imgUrl: string;
   favorited: boolean;
 }

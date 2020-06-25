@@ -1,1 +1,49 @@
-<h1 style="margin-top:100px"> cart </h1>
+<div class="container mt-4">
+  <h1 class="mb-4"> Shopping Cart</h1>
+  <div class="row colDiv col-sm-6 col-md-10 col-lg-12 my-3">
+    <p>
+      You have {{ total }} items in your shopping cart.
+    </p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Product</th>
+          <th class="text-center" style="width: 230px">Quantity</th>
+          <th class="text-right" style="width: 200px">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cart_items | async">
+          <td>
+            <img *ngIf="item.imgUrl" class="thumbnail img-responsive" style="height:80px;width: 80px;"
+              src="{{ item.imgUrl }}" alt="{{ item.name }}">
+          </td>
+          <td>
+            {{ item.name }}
+          </td>
+          <td>
+            <product-quantity [product]="item">
+            </product-quantity>
+          </td>
+          <td class="text-right">
+            {{ item.price | currency:'EUR':'symbol' }}
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="text-right">
+            {{ totalPrice| currency:'EUR':'symbol'}}
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+
+    <a *ngIf="total!==0" routerLink="" class="btn btn-primary mt-2 mr-4">Check Out</a>
+    <a *ngIf="total!==0" routerLink="" class="btn btn-danger mt-2" (click)="cleartCart()">Clear Cart</a>
+  </div>
+</div>
