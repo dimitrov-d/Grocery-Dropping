@@ -52,9 +52,11 @@ export class BackendInterceptor implements HttpInterceptor {
       if (!user) return error('E-mail or password is incorrect');
       return ok({
         id: user.id,
-        email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
+        email: user.email,
+        phoneNum: user.phoneNum,
+        address: user.address,
         token: 'jwt-token',
       });
     }
