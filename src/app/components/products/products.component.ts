@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -15,7 +16,11 @@ export class ProductsComponent {
   categories = Object.values(Category);
   current_categ: string;
 
-  constructor(private db: AngularFirestore, private toastr: ToastrService) {
+  constructor(
+    private db: AngularFirestore,
+    private toastr: ToastrService,
+    private userS: AuthenticationService
+  ) {
     this.products = this.getProducts();
     this.current_categ = Category.All;
   }
@@ -70,6 +75,6 @@ export class ProductsComponent {
     };
 
     this.db.collection('/cart').doc(product.id.toString()).set(data);
-    this.toastr.success('Product successfully added to cart', 'Success');
+    this.toastr.success(product.name + ' successfully added to cart', 'Done');
   }
 }
