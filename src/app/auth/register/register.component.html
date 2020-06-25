@@ -32,7 +32,7 @@
     <div *ngIf="controls.password.errors.minlength">Password must be at least 6 characters</div>
   </div>
 
-  <input type="text" class="form-control" placeholder="Address" formControlName="address"
+  <input type="text" class="form-control mb-4" placeholder="Address" formControlName="address"
     [ngClass]="{ 'is-invalid': submitted && controls.address.errors }" />
   <div *ngIf="submitted && controls.address.errors" class="invalid-feedback">
     <div *ngIf="controls.address.errors.required">Address Number is required</div>
