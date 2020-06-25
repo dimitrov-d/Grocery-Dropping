@@ -57,13 +57,13 @@
             <li *ngFor="let item of cart_items | async" class="list-group-item">
               {{ item.quantity}} x {{ item.name }}
               <div class="float-right">
-                {{ item.price * item.quantity| currency:'EUR':true}}
+                {{ item.price * item.quantity| currency:'EUR':'symbol'}}
               </div>
             </li>
             <li class="list-group-item font-weight-bold">
               Total
               <div class="float-right">
-                {{ totalPrice | currency:'EUR':true}}
+                {{ totalPrice | currency:'EUR':'symbol'}}
               </div>
             </li>
           </ul>
