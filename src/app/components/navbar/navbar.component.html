@@ -18,7 +18,8 @@
       </li>
       <li class="nav-item mx-auto" *ngIf="currentUser">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="cart">
-          <mdb-icon fas icon="shopping-cart"></mdb-icon> My Cart
+          <mdb-icon fas icon="shopping-cart"></mdb-icon>
+          <span class='badge badge-warning' id='lblCartCount'> {{cartTotal}} </span> My Cart
         </a>
       </li>
     </ul>
