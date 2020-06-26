@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { first } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private toastr: ToastrService
   ) {
     // Redirect to home if already logged in
     if (this.authService.currentUserSubject.value) {
@@ -51,12 +53,12 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (data) => {
           location.reload();
-         setTimeout(() => {
-           this.router.navigate([this.returnUrl]);
-         }, 3000);
+          setTimeout(() => {
+            this.router.navigate([this.returnUrl]);
+          }, 3000);
         },
         (error) => {
-          console.log(error.error.message)
+          this.toastr.error('Invalid credentials, try again', 'Error');
           this.loading = false;
         }
       );

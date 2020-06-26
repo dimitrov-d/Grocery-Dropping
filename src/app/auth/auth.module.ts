@@ -9,11 +9,16 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './util/jwt.interceptor';
 import { ErrorInterceptor } from './util/error.interceptor';
 import { BackendProvider } from './util/backend';
+import { AuthGuard } from '../guards/auth.guard';
 
 export const AUTH_ROUTES: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'account', component: AccountComponent },
+  {
+    path: 'account',
+    component: AccountComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
