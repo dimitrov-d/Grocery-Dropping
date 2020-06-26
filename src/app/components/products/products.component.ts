@@ -16,7 +16,9 @@ export class ProductsComponent {
   products: Observable<any[]>;
   categories = Object.values(Category);
   current_categ: string;
+  current_market: string;
   currentUser: User;
+  markets = ['Hofer', 'Lidl', 'Mercator'];
 
   constructor(
     private db: AngularFirestore,
@@ -42,6 +44,7 @@ export class ProductsComponent {
   }
 
   filterByCategory(category) {
+    this.current_market = null;
     this.current_categ = category;
     if (category == Category.All) {
       this.products = this.getProducts();
@@ -58,12 +61,28 @@ export class ProductsComponent {
     }
   }
 
+  filterByMarket(market) {
+    this.current_categ = null;
+    this.current_market = market;
+    this.products = this.db
+      .collection('/products', (prod) =>
+        prod.where('supermarket', '==', market)
+      )
+      .valueChanges();
+  }
+
   filterProducts(filter: string) {
     if (!filter) {
       this.products = this.getProducts();
     } else {
       this.products = this.db
-        .collection('/products', (prod) => prod.where('name', '==', filter))
+        .collection(
+          '/products',
+          (prod) =>
+            prod
+              .where('name', '>=', filter)
+              .where('name', '<=', filter + '\uf8ff') // Unicode range to be able to search by substring
+        )
         .valueChanges();
     }
   }

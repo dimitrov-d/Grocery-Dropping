@@ -2,9 +2,15 @@
   <div class="colDiv col-sm-1 col-md-2 col-lg-3 my-3">
     <div class="sticky-top mt-2 ml-3">
       <div class="list-group">
-        <a *ngFor="let category of categories" class="list-group-item list-group-item-action"
+        <a *ngFor="let category of categories" class="list-group-item py-1 list-group-item-action"
           (click)="filterByCategory(category)" [class.active]="category === current_categ"
           [ngStyle]="{'color': category === current_categ ? 'white' : '#4285F4'}">{{category}}
+        </a>
+      </div>
+      <div class="list-group mt-4">
+        <a *ngFor="let market of markets" class="list-group-item py-1 list-group-item-action"
+          (click)="filterByMarket(market)" [class.active]="market === current_market"
+          [ngStyle]="{'color': market === current_market ? 'white' : '#4285F4'}">{{market}}
         </a>
       </div>
       <input class="form-control mt-4" type="text" placeholder="Search for a product" aria-label="Search"
