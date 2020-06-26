@@ -1,3 +1,61 @@
-<p>
-  account works!
-</p>
+<form class="text-center border border-light p-5" [formGroup]="accountForm" id="form" (ngSubmit)="onSubmit()">
+
+  <p class="h4 mb-4">My Account</p>
+
+  <div class="form-row mb-4">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="First Name" formControlName="firstName"
+        [ngClass]="{ 'is-invalid': submitted && controls.firstName.errors }" />
+      <div *ngIf="submitted && controls.firstName.errors" class="invalid-feedback">
+        <div *ngIf="controls.firstName.errors.required">First Name is required</div>
+      </div>
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Last name" formControlName="lastName"
+        [ngClass]="{ 'is-invalid': submitted && controls.lastName.errors }" />
+      <div *ngIf="submitted && controls.lastName.errors" class="invalid-feedback">
+        <div *ngIf="controls.lastName.errors.required">Last Name is required</div>
+      </div>
+    </div>
+  </div>
+
+  <input type="email" class="form-control mb-4" placeholder="E-mail" formControlName="email"
+    [ngClass]="{ 'is-invalid': submitted && controls.email.errors }" />
+  <div *ngIf="submitted && controls.email.errors" class="invalid-feedback">
+    <div *ngIf="controls.email.errors.required">E-mail is required</div>
+  </div>
+
+  <input type="password" class="form-control mb-4" placeholder="Password" formControlName="password"
+    [ngClass]="{ 'is-invalid': submitted && controls.password.errors }" />
+  <div *ngIf="submitted && controls.password.errors" class="invalid-feedback">
+    <div *ngIf="controls.password.errors.required">Password is required</div>
+    <div *ngIf="controls.password.errors.minlength">Password must be at least 6 characters</div>
+  </div>
+
+  <input type="text" class="form-control mb-4" placeholder="Address" formControlName="address"
+    [ngClass]="{ 'is-invalid': submitted && controls.address.errors }" />
+  <div *ngIf="submitted && controls.address.errors" class="invalid-feedback">
+    <div *ngIf="controls.address.errors.required">Address Number is required</div>
+    <div *ngIf="controls.address.errors.minlength">Address must be at least 6 characters</div>
+  </div>
+
+  <input type="number" class="form-control mb-4" placeholder="Phone number" formControlName="phoneNum"
+    [ngClass]="{ 'is-invalid': submitted && controls.phoneNum.errors }" />
+  <div *ngIf="submitted && controls.phoneNum.errors" class="invalid-feedback">
+    <div *ngIf="controls.phoneNum.errors.required">Phone Number is required</div>
+    <div *ngIf="controls.phoneNum.errors.minlength">Phone Number must be at least 6 characters</div>
+  </div>
+
+
+  <div class="row">
+    <div class="col">
+      <button [disabled]="loading" class="btn btn-primary mt-4 btn-block">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Modify Info
+      </button>
+    </div>
+    <div class="col mt-4">
+      <a routerLink="/login">Cancel</a>
+    </div>
+  </div>
+</form>

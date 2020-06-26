@@ -34,9 +34,11 @@ export class BackendInterceptor implements HttpInterceptor {
           return authenticate();
         case url.endsWith('/user/register') && method === 'POST':
           return register();
+        case url.endsWith('/user/modify') && method == 'POST':
+          return updateUser();
         case url.endsWith('/users') && method === 'GET':
           return getUsers();
-        case url.match(/\/users\/\d+$/) && method === 'DELETE':
+        case url.match('/user/delete/([^s]+)') && method === 'DELETE':
           return deleteUser();
         default:
           // Pass through any requests not handled above
@@ -75,15 +77,24 @@ export class BackendInterceptor implements HttpInterceptor {
       return ok();
     }
 
+    function updateUser() {
+      const user = body;
+
+      user.id = users.length ? Math.max(...users.map((u) => u.id)) + 1 : 1;
+      users.push(user);
+      localStorage.setItem('users', JSON.stringify(users));
+
+      return ok();
+    }
+
     function getUsers() {
       if (!isLoggedIn()) return unauthorized();
       return ok(users);
     }
 
     function deleteUser() {
-      if (!isLoggedIn()) return unauthorized();
-
-      users = users.filter((u) => u.id !== idFromUrl());
+      // if (!isLoggedIn()) return unauthorized();
+      users = users.filter((u) => u.email !== emailFromUrl());
       localStorage.setItem('users', JSON.stringify(users));
       return ok();
     }
@@ -104,9 +115,9 @@ export class BackendInterceptor implements HttpInterceptor {
       return headers.get('Authorization') === 'Bearer jwt-token';
     }
 
-    function idFromUrl() {
+    function emailFromUrl() {
       const urlParts = url.split('/');
-      return parseInt(urlParts[urlParts.length - 1]);
+      return urlParts[urlParts.length - 1];
     }
   }
 }

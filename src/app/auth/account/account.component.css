@@ -1,0 +1,10 @@
+@media(min-width:576px) {
+  #form {
+    width: 40%
+  }
+}
+
+#form {
+  margin: auto;
+  margin-top: 100px;
+}

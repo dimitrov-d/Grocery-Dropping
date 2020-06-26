@@ -45,4 +45,12 @@ export class AuthenticationService {
   getUsers() {
     return this.http.get<User[]>(`/users`);
   }
+
+  deleteUser(user: User) {
+    return this.http.delete(`/user/delete/` + user.email);
+  }
+
+  modifyUser(user: User) {
+    return this.http.post(`/user/modify`, user);
+  }
 }
