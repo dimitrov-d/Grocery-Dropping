@@ -45,7 +45,17 @@
             <div *ngIf="controls.phoneNum.errors.required">Phone Number is required</div>
           </div>
         </div>
-        <button class="btn btn-primary mt-3" (click)="placeOrder()">Place Order</button>
+        <div class="form-group">
+          <label>Delivery date and time:</label>
+          <input [min]="date" class="form-control" formControlName="datetime" [owlDateTime]="picker"
+            [owlDateTimeTrigger]="picker" placeholder="Date & Time"
+            [ngClass]="{ 'is-invalid': submitted && controls.datetime.errors }" />
+          <div *ngIf="submitted && controls.datetime.errors" class="invalid-feedback">
+            <div *ngIf="controls.datetime.errors.required">Please choose a date and time</div>
+          </div>
+          <owl-date-time #picker [startAt]="date"></owl-date-time>
+          <button class="btn btn-primary mt-3">Place Order</button>
+        </div>
       </form>
     </div>
     <div class="col-6">

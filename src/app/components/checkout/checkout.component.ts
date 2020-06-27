@@ -18,6 +18,7 @@ export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
   submitted = false;
   currentUser: User;
+  date = new Date();
 
   constructor(
     private db: AngularFirestore,
@@ -32,6 +33,8 @@ export class CheckoutComponent implements OnInit {
         this.getTotalPrice(products);
         this.total = products.length;
       });
+
+    this.date.setDate(this.date.getDate() + 1);
   }
 
   ngOnInit() {
@@ -41,6 +44,7 @@ export class CheckoutComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phoneNum: ['', [Validators.required, Validators.minLength(6)]],
       address: ['', [Validators.required, Validators.minLength(6)]],
+      datetime: ['', Validators.required],
     });
     this.currentUser = this.authService.currentUserSubject.value || null;
     this.setInputData();
@@ -60,6 +64,10 @@ export class CheckoutComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    if (this.checkoutForm.invalid) {
+      return;
+    }
+    this.cart.completeOrder();
   }
 
   setInputData() {
@@ -68,9 +76,5 @@ export class CheckoutComponent implements OnInit {
     this.checkoutForm.get('address').setValue(this.currentUser.address);
     this.checkoutForm.get('email').setValue(this.currentUser.email);
     this.checkoutForm.get('phoneNum').setValue(this.currentUser.phoneNum);
-  }
-
-  placeOrder() {
-    this.cart.completeOrder();
   }
 }

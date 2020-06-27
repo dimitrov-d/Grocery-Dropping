@@ -21,6 +21,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from './components/modal/modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 registerLocaleData(localeSl, 'sl');
 
@@ -32,7 +33,7 @@ registerLocaleData(localeSl, 'sl');
     ProductsComponent,
     QuantityComponent,
     CheckoutComponent,
-    ModalComponent
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +47,8 @@ registerLocaleData(localeSl, 'sl');
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     NgbModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
   ],
   bootstrap: [AppComponent],
   exports: [RouterModule],
