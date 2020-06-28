@@ -3,9 +3,9 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
-import { ToastrService } from 'ngx-toastr';
-import { AuthenticationService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
+import { ProductsService } from 'src/app/services/products.service';
+import { AuthenticationService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -22,33 +22,28 @@ export class ProductsComponent {
 
   constructor(
     private db: AngularFirestore,
-    private toastr: ToastrService,
+    private prodService: ProductsService,
     private authService: AuthenticationService
   ) {
     this.products = this.getProducts();
-    this.current_categ = Category.All;
     this.currentUser = this.authService.currentUserSubject.value || null;
+    this.current_categ = Category.All;
   }
 
-  async toggleHeart(index) {
+  toggleHeart(index) {
     if (!this.currentUser) {
-      this.toastr.error('You must be logged in to continue!', 'Error');
+      this.prodService.error('You must be logged in to continue');
       return;
     }
-    let docRef = this.db.collection('/products').doc(index.toString());
-    let data = (await docRef.get().toPromise()).data();
-    this.db
-      .collection('/products')
-      .doc(index.toString())
-      .update({ favorited: !data.favorited });
+    return this.prodService.toggleHeart(index);
   }
 
   filterByCategory(category) {
     this.current_market = null;
     this.current_categ = category;
-    if (category == Category.All) {
+    if (category === Category.All) {
       this.products = this.getProducts();
-    } else if (category == Category.Favorites) {
+    } else if (category === Category.Favorites) {
       this.products = this.products = this.db
         .collection('/products', (prod) => prod.where('favorited', '==', true))
         .valueChanges();
@@ -92,20 +87,6 @@ export class ProductsComponent {
   }
 
   addToCart(product: Product) {
-    if (!this.currentUser) {
-      this.toastr.error('You must be logged in to continue!', 'Error');
-      return;
-    }
-
-    let data = {
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      imgUrl: product.imgUrl,
-      quantity: 1,
-    };
-
-    this.db.collection('/cart').doc(product.id.toString()).set(data);
-    this.toastr.success(product.name + ' successfully added to cart', 'Done');
+    this.prodService.addToCart(product);
   }
 }

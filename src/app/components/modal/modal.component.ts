@@ -12,11 +12,11 @@ export class ModalComponent implements OnInit {
   myDate: any;
   date: Object;
   constructor(private cart: CartService) {
-    var currentTime = new Date();
-    var month = currentTime.getMonth() + 1;
-    var day = currentTime.getDate();
-    var year = currentTime.getFullYear();
-    this.date = { year: year, month: month, day: day };
+    const currentTime = new Date();
+    const month = currentTime.getMonth() + 1;
+    const day = currentTime.getDate();
+    const year = currentTime.getFullYear();
+    this.date = { year, month, day };
   }
 
   ngOnInit() {}

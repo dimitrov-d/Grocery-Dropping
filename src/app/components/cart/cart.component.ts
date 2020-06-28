@@ -17,13 +17,11 @@ export class CartComponent {
 
   constructor(private db: AngularFirestore, private cart: CartService) {
     this.cart_items = this.cart.getItems();
-    db.collection('/cart')
-      .valueChanges()
-      .subscribe((products) => {
-        this.cart_prods = products;
-        this.totalPrice = this.cart.updateTotalPrice(products);
-        this.total = products.length;
-      });
+    this.cart_items.subscribe((products) => {
+      this.cart_prods = products;
+      this.totalPrice = this.cart.updateTotalPrice(products);
+      this.total = products.length;
+    });
 
     db.collection('saved')
       .valueChanges()

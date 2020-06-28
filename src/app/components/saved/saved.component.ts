@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/internal/Observable';
+import { SavedService } from 'src/app/services/saved.service';
 
 @Component({
   selector: 'app-saved',
@@ -11,7 +12,7 @@ export class SavedComponent {
   saved_items: Observable<any[]>;
   savedTotal: number;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private saved: SavedService) {
     this.saved_items = this.db.collection('/saved').valueChanges();
     this.saved_items.subscribe((saved) => {
       this.savedTotal = saved.length;
@@ -19,33 +20,14 @@ export class SavedComponent {
   }
 
   deleteOrder(index: number) {
-    this.db.collection('/saved').doc(index.toString()).delete();
+    this.saved.deleteOrder(index);
   }
 
   addOrderToCart(index: number) {
-    this.db
-      .collection('/saved')
-      .doc(index.toString())
-      .valueChanges()
-      .subscribe((x: any) => {
-        let products: any[] = x.prods;
-        products.forEach((prod) => this.addToCart(prod));
-      });
-  }
-
-  addToCart(product) {
-    this.db.collection('/cart').doc(product.id.toString()).set(product);
+    this.saved.addOrderToCart(index);
   }
 
   clearOrders() {
-    this.db
-      .collection('/saved')
-      .get()
-      .toPromise()
-      .then((res) => {
-        res.forEach((order) => {
-          order.ref.delete();
-        });
-      });
+    this.saved.clearOrders();
   }
 }

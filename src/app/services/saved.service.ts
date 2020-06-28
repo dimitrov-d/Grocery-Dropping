@@ -14,7 +14,7 @@ export class SavedService {
       .doc(index.toString())
       .valueChanges()
       .subscribe((x: any) => {
-        let products: any[] = x.prods;
+        const products: any[] = x.prods;
         products.forEach((prod) => this.addToCart(prod));
       });
     this.toastr.success('Order successfully added to cart', 'Done');

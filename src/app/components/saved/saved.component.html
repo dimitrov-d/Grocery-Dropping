@@ -8,8 +8,8 @@
       <thead>
         <tr>
           <th class="text-left">Products</th>
-          <th class="text-center"> Price</th>
-          <th class="text-center">Total Price</th>
+          <th class="text-center">Prices</th>
+          <th class="text-center">Total</th>
           <th class="text-center">Add</th>
           <th class="text-center">Delete</th>
         </tr>
@@ -27,7 +27,8 @@
             </div>
           </td>
           <td class="text-center">
-            {{ item.totalPrice| currency:'EUR':'symbol'}} </td>
+            <b> {{ item.totalPrice| currency:'EUR':'symbol'}} </b>
+          </td>
           <td class="text-center">
             <a class="btn btn-primary" style="color: white;" (click)="addOrderToCart(item.id)">Add to cart</a>
           </td>

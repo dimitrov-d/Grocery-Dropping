@@ -51,8 +51,8 @@ export class CheckoutComponent implements OnInit {
   }
 
   getTotalPrice(products: any) {
-    var current_price = 0;
-    for (var i = 0; i < products.length; i++) {
+    let current_price = 0;
+    for (let i = 0; i < products.length; i++) {
       current_price += products[i].quantity * products[i].price;
     }
     this.totalPrice = current_price;

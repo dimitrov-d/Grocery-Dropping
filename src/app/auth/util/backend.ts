@@ -34,7 +34,7 @@ export class BackendInterceptor implements HttpInterceptor {
           return authenticate();
         case url.endsWith('/user/register') && method === 'POST':
           return register();
-        case url.endsWith('/user/modify') && method == 'POST':
+        case url.endsWith('/user/modify') && method === 'POST':
           return updateUser();
         case url.endsWith('/users') && method === 'GET':
           return getUsers();
@@ -51,7 +51,7 @@ export class BackendInterceptor implements HttpInterceptor {
       const user = users.find(
         (u) => u.email === email && u.password === password
       );
-      if (!user) return error('E-mail or password is incorrect');
+      if (!user) { return error('E-mail or password is incorrect'); }
       return ok({
         id: user.id,
         firstName: user.firstName,
@@ -88,7 +88,7 @@ export class BackendInterceptor implements HttpInterceptor {
     }
 
     function getUsers() {
-      if (!isLoggedIn()) return unauthorized();
+      if (!isLoggedIn()) { return unauthorized(); }
       return ok(users);
     }
 

@@ -37,15 +37,15 @@ export class CartService {
   }
 
   updateTotalPrice(products: any) {
-    var current_price = 0;
-    for (var i = 0; i < products.length; i++) {
+    let current_price = 0;
+    for (let i = 0; i < products.length; i++) {
       current_price += products[i].quantity * products[i].price;
     }
     return current_price;
   }
 
   saveOrder(cart_prods, totalSaved: number) {
-    let prods = [];
+    const prods = [];
     cart_prods.forEach((prod) => {
       prods.push(prod);
     });
@@ -59,11 +59,11 @@ export class CartService {
   }
 
   updateSavedPrice(prods: any[], totalSaved: number) {
-    var price = 0;
-    for (var i = 0; i < prods.length; i++) {
-      price += prods[i].price;
+    let price = 0;
+    for (let i = 0; i < prods.length; i++) {
+      price += prods[i].price * prods[i].quantity;
     }
-    let doc = this.db.collection('saved').doc(totalSaved.toString());
+    const doc = this.db.collection('saved').doc(totalSaved.toString());
     doc.update({ id: totalSaved, totalPrice: price });
   }
 }

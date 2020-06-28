@@ -18,7 +18,7 @@ export class QuantityComponent implements OnInit{
   }
 
   increaseQuantity(product: Product) {
-    let data = {
+    const data = {
       id: product.id,
       name: product.name,
       price: product.price,
@@ -30,10 +30,10 @@ export class QuantityComponent implements OnInit{
   }
 
   decreaseQuantity(product: Product) {
-    if (this.quantity == 1) {
+    if (this.quantity === 1) {
       this.db.collection('/cart').doc(product.id.toString()).delete();
     } else {
-      let data = {
+      const data = {
         id: product.id,
         name: product.name,
         price: product.price,
@@ -46,7 +46,7 @@ export class QuantityComponent implements OnInit{
   }
 
   getQuantity(product: Product) {
-    let name = product.name;
+    const name = product.name;
     this.db
       .collection('/cart', (ref) => ref.where('name', '==', name))
       .valueChanges()
