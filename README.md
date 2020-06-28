@@ -1,6 +1,8 @@
-# GroceryDropping
+# Grocery Dropping
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
+
+Demo is available [here](https://grocery-dropping.web.app)
 
 ## Development server
 
