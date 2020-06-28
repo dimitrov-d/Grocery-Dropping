@@ -12,15 +12,22 @@ export class CartComponent {
   cart_items: Observable<any[]>;
   total: number;
   totalPrice: number;
+  cart_prods: any[];
+  totalSaved: number;
 
   constructor(private db: AngularFirestore, private cart: CartService) {
     this.cart_items = this.cart.getItems();
     db.collection('/cart')
       .valueChanges()
       .subscribe((products) => {
+        this.cart_prods = products;
         this.updateTotalPrice(products);
         this.total = products.length;
       });
+
+    db.collection('saved')
+      .valueChanges()
+      .subscribe((s) => (this.totalSaved = s.length));
   }
 
   updateTotalPrice(products: any) {
@@ -35,4 +42,26 @@ export class CartComponent {
     this.cart.cleartCart();
   }
 
+  saveOrder() {
+    let prods = [];
+    this.cart_prods.forEach((prod) => {
+      prods.push(prod);
+    });
+
+    this.db
+      .collection('saved')
+      .doc((++this.totalSaved).toString())
+      .set({ prods });
+    this.updateSavedPrice(prods);
+  }
+
+  updateSavedPrice(prods: any[]) {
+    var price = 0;
+    for (var i = 0; i < prods.length; i++) {
+      price += prods[i].price;
+    }
+    let doc = this.db.collection('saved').doc(this.totalSaved.toString());
+    doc.update({ id: this.totalSaved });
+    doc.update({ totalPrice: price });
+  }
 }
