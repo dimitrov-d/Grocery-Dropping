@@ -2,46 +2,41 @@
   <h1 class="mb-4"> Saved Orders</h1>
   <div class="row colDiv col-sm-3 col-md-6 col-lg-12 my-3">
     <p>
-      You have no items in your shopping cart.
+      You have {{savedTotal}} saved orders
     </p>
     <table class="table">
       <thead>
         <tr>
-          <th>Text</th>
-          <th>Product</th>
-          <th class="text-center" style="width: 230px">Quantity</th>
-          <th class="text-right" style="width: 200px">Price</th>
+          <th class="text-left">Products</th>
+          <th class="text-center"> Price</th>
+          <th class="text-center">Total Price</th>
+          <th class="text-center">Add</th>
+          <th class="text-center">Delete</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of saved_items | async">
+        <tr *ngFor="let item of saved_items | async;">
           <td>
-            <div *ngFor="let prod of item.prods">
+            <div *ngFor="let prod of item.prods" class="text-left">
               {{prod.name}} x {{prod.quantity}}
             </div>
           </td>
           <td>
-            <div *ngFor="let prod of item.prods">
+            <div *ngFor="let prod of item.prods" class="text-center">
               {{ prod.price| currency:'EUR':'symbol'}}
             </div>
           </td>
-          <td class="text-right">
+          <td class="text-center">
             {{ item.totalPrice| currency:'EUR':'symbol'}} </td>
-            <td class="text-right">
-              {{ item.totalPrice| currency:'EUR':'symbol'}} </td>
+          <td class="text-center">
+            <a class="btn btn-primary" style="color: white;" (click)="addOrderToCart(item.id)">Add to cart</a>
+          </td>
+          <td class="text-center">
+            <a class="btn btn-danger" style="color: white;" (click)="deleteOrder(item.id)">Delete order</a> </td>
         </tr>
+        <td *ngFor="let i of [0,1,2,3,4]"></td>
       </tbody>
     </table>
-
-    <!-- <a *ngIf="total!==0" data-toggle="modal" data-target="#centralModalSm" class="btn btn-primary mt-2 mr-4"
-      style="color: white;">Check
-      Out</a>
-    <a *ngIf="total!==0" class="btn btn-success mt-2 mr-4" style="color: white;" (click)="saveOrder()">Save Order</a>
-    <a *ngIf="total!==0" routerLink="" class="btn btn-danger mt-2" (click)="cleartCart()">Clear Cart</a>
-
-    <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-      aria-hidden="true">
-      <app-modal></app-modal> -->
+    <a *ngIf="savedTotal!==0" class="btn btn-danger mt-4" style="color: white;" (click)="clearOrders()">Clear orders</a>
   </div>
-
 </div>
