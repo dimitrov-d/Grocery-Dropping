@@ -23,7 +23,6 @@ import { ModalComponent } from './components/modal/modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { SavedComponent } from './components/saved/saved.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 registerLocaleData(localeSl, 'sl');
 
@@ -52,7 +51,6 @@ registerLocaleData(localeSl, 'sl');
     NgbModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    FontAwesomeModule,
   ],
   bootstrap: [AppComponent],
   exports: [RouterModule],

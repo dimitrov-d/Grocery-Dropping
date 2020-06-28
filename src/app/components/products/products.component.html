@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="colDiv col-sm-2 col-md-3 col-lg-3 my-4">
+  <div class="colDiv col-sm-2 col-md-3 col-lg-3 my-4" style="z-index: 0;">
     <div class="sticky-top mt-2 ml-3">
       <div class="list-group">
         <a *ngFor="let category of categories" class="list-group-item py-1 list-group-item-action"
@@ -27,7 +27,7 @@
             <div class="card-body">
               <h4 class="card-title title">{{product.name}}</h4>
               <a (click)="toggleHeart(product.id)">
-                <mdb-icon *ngIf="!product.favorited || !currentUser; else fullHeart" class="icon"
+                <mdb-icon *ngIf="!product.favorited || !prodService.currentUser; else fullHeart" class="icon"
                   style="float: right; color: red" far icon="heart fa-3x"></mdb-icon>
                 <ng-template #fullHeart>
                   <mdb-icon class="icon" style="float: right; color: red" fas icon="heart fa-3x"></mdb-icon>

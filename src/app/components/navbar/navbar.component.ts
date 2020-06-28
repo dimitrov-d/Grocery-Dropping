@@ -35,9 +35,9 @@ export class NavbarComponent {
   logout() {
     location.reload();
     setTimeout(() => {
-      this.cart.cleartCart();
       this.currentUser = null;
     }, 1000);
+    this.cart.clearCart();
     this.authService.logout();
   }
 }

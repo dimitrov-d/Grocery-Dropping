@@ -3,9 +3,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
-import { User } from 'src/app/models/user';
 import { ProductsService } from 'src/app/services/products.service';
-import { AuthenticationService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -17,24 +15,17 @@ export class ProductsComponent {
   categories = Object.values(Category);
   current_categ: string;
   current_market: string;
-  currentUser: User;
   markets = ['Hofer', 'Lidl', 'Mercator'];
 
   constructor(
     private db: AngularFirestore,
-    private prodService: ProductsService,
-    private authService: AuthenticationService
+    public prodService: ProductsService
   ) {
     this.products = this.getProducts();
-    this.currentUser = this.authService.currentUserSubject.value || null;
     this.current_categ = Category.All;
   }
 
   toggleHeart(index) {
-    if (!this.currentUser) {
-      this.prodService.error('You must be logged in to continue');
-      return;
-    }
     return this.prodService.toggleHeart(index);
   }
 

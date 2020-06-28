@@ -18,7 +18,7 @@ export class CartService {
     return this.db.collection('/cart').valueChanges();
   }
 
-  cleartCart() {
+  clearCart() {
     this.db
       .collection('cart')
       .get()
@@ -32,7 +32,7 @@ export class CartService {
 
   completeOrder() {
     this.toastr.success('Order completed, thank you!', 'Success');
-    this.cleartCart();
+    this.clearCart();
     this.router.navigate(['/'], { relativeTo: this.route });
   }
 

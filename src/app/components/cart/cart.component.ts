@@ -28,8 +28,8 @@ export class CartComponent {
       .subscribe((s) => (this.totalSaved = s.length));
   }
 
-  cleartCart() {
-    this.cart.cleartCart();
+  clearCart() {
+    this.cart.clearCart();
   }
 
   saveOrder() {

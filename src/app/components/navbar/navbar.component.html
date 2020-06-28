@@ -29,7 +29,8 @@
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           <mdb-icon fas icon="user"></mdb-icon>Profile<span class="caret"></span>
         </a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary dropdown-menu-right" role="menu">
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary dropdown-menu-right" role="menu"
+          style="z-index: 99999 !important;">
           <b><span class="dropdown-item" style="color: #4285F4">
               {{currentUser.firstName}}
               {{currentUser.lastName}}</span></b>
