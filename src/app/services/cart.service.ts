@@ -35,4 +35,35 @@ export class CartService {
     this.cleartCart();
     this.router.navigate(['/'], { relativeTo: this.route });
   }
+
+  updateTotalPrice(products: any) {
+    var current_price = 0;
+    for (var i = 0; i < products.length; i++) {
+      current_price += products[i].quantity * products[i].price;
+    }
+    return current_price;
+  }
+
+  saveOrder(cart_prods, totalSaved: number) {
+    let prods = [];
+    cart_prods.forEach((prod) => {
+      prods.push(prod);
+    });
+
+    this.db
+      .collection('saved')
+      .doc((++totalSaved).toString())
+      .set({ prods });
+    this.updateSavedPrice(prods, totalSaved);
+    this.toastr.success('Order successfully saved', 'Done');
+  }
+
+  updateSavedPrice(prods: any[], totalSaved: number) {
+    var price = 0;
+    for (var i = 0; i < prods.length; i++) {
+      price += prods[i].price;
+    }
+    let doc = this.db.collection('saved').doc(totalSaved.toString());
+    doc.update({ id: totalSaved, totalPrice: price });
+  }
 }

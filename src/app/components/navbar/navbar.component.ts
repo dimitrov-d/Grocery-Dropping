@@ -12,6 +12,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 export class NavbarComponent {
   currentUser: User;
   cartTotal: number;
+  savedTotal: number;
   constructor(
     private authService: AuthenticationService,
     private cart: CartService,
@@ -22,6 +23,12 @@ export class NavbarComponent {
       .valueChanges()
       .subscribe((products) => {
         this.cartTotal = products.length;
+      });
+
+    db.collection('/saved')
+      .valueChanges()
+      .subscribe((saved) => {
+        this.savedTotal = saved.length;
       });
   }
 

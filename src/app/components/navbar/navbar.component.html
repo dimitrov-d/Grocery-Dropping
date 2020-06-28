@@ -13,13 +13,14 @@
       </li>
       <li class="nav-item mx-auto" *ngIf="currentUser">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="saved">
-          <mdb-icon fas icon="shopping-basket"></mdb-icon> Saved Orders
+          <mdb-icon fas icon="shopping-basket"></mdb-icon>
+          <span class='badge badge-warning' id='countLabel'> {{savedTotal}}</span>Saved Orders
         </a>
       </li>
       <li class="nav-item mx-auto" *ngIf="currentUser">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="cart">
           <mdb-icon fas icon="shopping-cart"></mdb-icon>
-          <span class='badge badge-warning' id='lblCartCount'> {{cartTotal}} </span> My Cart
+          <span class='badge badge-warning' id='countLabel'> {{cartTotal}} </span> My Cart
         </a>
       </li>
     </ul>

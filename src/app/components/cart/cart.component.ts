@@ -21,7 +21,7 @@ export class CartComponent {
       .valueChanges()
       .subscribe((products) => {
         this.cart_prods = products;
-        this.updateTotalPrice(products);
+        this.totalPrice = this.cart.updateTotalPrice(products);
         this.total = products.length;
       });
 
@@ -30,38 +30,11 @@ export class CartComponent {
       .subscribe((s) => (this.totalSaved = s.length));
   }
 
-  updateTotalPrice(products: any) {
-    var current_price = 0;
-    for (var i = 0; i < products.length; i++) {
-      current_price += products[i].quantity * products[i].price;
-    }
-    this.totalPrice = current_price;
-  }
-
   cleartCart() {
     this.cart.cleartCart();
   }
 
   saveOrder() {
-    let prods = [];
-    this.cart_prods.forEach((prod) => {
-      prods.push(prod);
-    });
-
-    this.db
-      .collection('saved')
-      .doc((++this.totalSaved).toString())
-      .set({ prods });
-    this.updateSavedPrice(prods);
-  }
-
-  updateSavedPrice(prods: any[]) {
-    var price = 0;
-    for (var i = 0; i < prods.length; i++) {
-      price += prods[i].price;
-    }
-    let doc = this.db.collection('saved').doc(this.totalSaved.toString());
-    doc.update({ id: this.totalSaved });
-    doc.update({ totalPrice: price });
+    this.cart.saveOrder(this.cart_prods, this.totalSaved);
   }
 }
