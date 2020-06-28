@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <h1 class="mb-4"> Saved Orders</h1>
+  <div class="row colDiv col-sm-3 col-md-6 col-lg-12 my-3">
+    <p>
+      You have no items in your shopping cart.
+    </p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Text</th>
+          <th>Product</th>
+          <th class="text-center" style="width: 230px">Quantity</th>
+          <th class="text-right" style="width: 200px">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of saved_items | async">
+          <td>
+            <div *ngFor="let prod of item.prods">
+              {{prod.name}} x {{prod.quantity}}
+            </div>
+          </td>
+          <td>
+            <div *ngFor="let prod of item.prods">
+              {{ prod.price| currency:'EUR':'symbol'}}
+            </div>
+          </td>
+          <td class="text-right">
+            {{ item.totalPrice| currency:'EUR':'symbol'}} </td>
+            <td class="text-right">
+              {{ item.totalPrice| currency:'EUR':'symbol'}} </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <a *ngIf="total!==0" data-toggle="modal" data-target="#centralModalSm" class="btn btn-primary mt-2 mr-4"
+      style="color: white;">Check
+      Out</a>
+    <a *ngIf="total!==0" class="btn btn-success mt-2 mr-4" style="color: white;" (click)="saveOrder()">Save Order</a>
+    <a *ngIf="total!==0" routerLink="" class="btn btn-danger mt-2" (click)="cleartCart()">Clear Cart</a>
+
+    <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true">
+      <app-modal></app-modal> -->
+  </div>
+
+</div>

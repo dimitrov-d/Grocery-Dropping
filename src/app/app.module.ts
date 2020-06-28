@@ -22,6 +22,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from './components/modal/modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { SavedComponent } from './components/saved/saved.component';
 
 registerLocaleData(localeSl, 'sl');
 
@@ -34,6 +35,7 @@ registerLocaleData(localeSl, 'sl');
     QuantityComponent,
     CheckoutComponent,
     ModalComponent,
+    SavedComponent,
   ],
   imports: [
     BrowserModule,
