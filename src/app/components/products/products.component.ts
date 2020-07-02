@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { ProductsService } from 'src/app/services/products.service';
+import { Options, LabelType } from 'ng5-slider';
 
 @Component({
   selector: 'app-products',
@@ -16,7 +17,23 @@ export class ProductsComponent {
   current_categ: string;
   current_market: string;
   markets = ['Hofer', 'Lidl', 'Mercator'];
-
+  minPrice: number = 0;
+  maxPrice: number = 3;
+  options: Options = {
+    floor: 0,
+    ceil: 3,
+    tickStep: 0.2,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '&euro;';
+        case LabelType.High:
+          return value + '&euro;';
+        default:
+          return value + '&euro;';
+      }
+    },
+  };
   constructor(
     private db: AngularFirestore,
     public prodService: ProductsService
@@ -44,9 +61,8 @@ export class ProductsComponent {
         )
         .valueChanges();
     }
-        this.current_market = null;
-        this.current_categ = category;
-
+    this.current_market = null;
+    this.current_categ = category;
   }
 
   filterByMarket(market) {
@@ -60,6 +76,8 @@ export class ProductsComponent {
   }
 
   filterProducts(filter: string) {
+    this.current_categ = null;
+    this.current_market = null;
     if (!filter) {
       this.products = this.getProducts();
     } else {
@@ -73,6 +91,18 @@ export class ProductsComponent {
         )
         .valueChanges();
     }
+  }
+
+  filterByPrice() {
+    this.current_categ = null;
+    this.current_market = null;
+    this.products = this.db
+      .collection('/products', (prod) =>
+        prod
+          .where('price', '>=', this.minPrice)
+          .where('price', '<=', this.maxPrice)
+      )
+      .valueChanges();
   }
 
   getProducts() {

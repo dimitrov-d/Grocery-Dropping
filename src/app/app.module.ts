@@ -23,6 +23,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { SavedComponent } from './components/saved/saved.component';
+import { Ng5SliderModule } from 'ng5-slider';
 
 registerLocaleData(localeSl, 'sl');
 
@@ -51,6 +52,7 @@ registerLocaleData(localeSl, 'sl');
     NgbModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    Ng5SliderModule,
   ],
   bootstrap: [AppComponent],
   exports: [RouterModule],
