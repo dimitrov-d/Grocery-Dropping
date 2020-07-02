@@ -17,7 +17,8 @@
     <div class="d-flex justify-content-around">
       <div>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input">
+          <input id="defaultLoginFormRemember" type="checkbox" class="custom-control-input" [(ngModel)]="rememberMe"
+            [ngModelOptions]="{standalone: true}">
           <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
         </div>
       </div>

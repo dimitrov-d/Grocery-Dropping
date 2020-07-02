@@ -65,10 +65,16 @@ export class AccountComponent implements OnInit {
       .subscribe(
         (success) => {
           this.toastr.success('Update Successful', 'Success');
-          localStorage.setItem(
-            'currentUser',
-            JSON.stringify(this.accountForm.value)
-          );
+          if (!localStorage.getItem('currentUser')) {
+            sessionStorage.setItem(
+              'currentUser',
+              JSON.stringify(this.accountForm.value))
+          }
+          else {
+            localStorage.setItem(
+              'currentUser',
+              JSON.stringify(this.accountForm.value))
+          }
           this.authService.currentUserSubject.next(this.accountForm.value);
           this.loading = false;
           setTimeout(() => {

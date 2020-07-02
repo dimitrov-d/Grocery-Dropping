@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './util/jwt.interceptor';
 import { ErrorInterceptor } from './util/error.interceptor';
@@ -26,6 +26,7 @@ export const AUTH_ROUTES: Routes = [
     CommonModule,
     RouterModule.forChild(AUTH_ROUTES),
     ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [LoginComponent, RegisterComponent, AccountComponent],
   providers: [

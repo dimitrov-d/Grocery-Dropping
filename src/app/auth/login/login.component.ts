@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
+  rememberMe = false;
   returnUrl: string;
 
   constructor(
@@ -42,13 +43,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     if (this.loginForm.invalid) {
       return;
     }
     this.loading = true;
     this.authService
-      .login(this.controls.email.value, this.controls.password.value)
+      .login(this.controls.email.value, this.controls.password.value, this.rememberMe)
       .pipe(first())
       .subscribe(
         (data) => {
