@@ -50,4 +50,12 @@ export class ProductsService {
     this.db.collection('/cart').doc(product.id.toString()).set(data);
     this.toastr.success(product.name + ' successfully added to cart', 'Done');
   }
+
+  authorizeFavorites() {
+    if (!this.authService.currentUserSubject.value) {
+      this.toastr.error('You must be logged in to continue!', 'Error');
+      return false;
+    }
+    return true;
+  }
 }

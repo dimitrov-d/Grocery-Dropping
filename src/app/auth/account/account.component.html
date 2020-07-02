@@ -39,7 +39,7 @@
     <div *ngIf="controls.address.errors.minlength">Address must be at least 6 characters</div>
   </div>
 
-  <input type="number" class="form-control mb-4" placeholder="Phone number" formControlName="phoneNum"
+  <input type="number" class="form-control mb-4" placeholder="Phone Number" formControlName="phoneNum"
     [ngClass]="{ 'is-invalid': submitted && controls.phoneNum.errors }" />
   <div *ngIf="submitted && controls.phoneNum.errors" class="invalid-feedback">
     <div *ngIf="controls.phoneNum.errors.required">Phone Number is required</div>

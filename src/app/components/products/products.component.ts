@@ -30,11 +30,10 @@ export class ProductsComponent {
   }
 
   filterByCategory(category) {
-    this.current_market = null;
-    this.current_categ = category;
     if (category === Category.All) {
       this.products = this.getProducts();
     } else if (category === Category.Favorites) {
+      if (!this.prodService.authorizeFavorites()) return;
       this.products = this.products = this.db
         .collection('/products', (prod) => prod.where('favorited', '==', true))
         .valueChanges();
@@ -45,6 +44,9 @@ export class ProductsComponent {
         )
         .valueChanges();
     }
+        this.current_market = null;
+        this.current_categ = category;
+
   }
 
   filterByMarket(market) {
