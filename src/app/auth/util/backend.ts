@@ -57,6 +57,7 @@ export class BackendInterceptor implements HttpInterceptor {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        password: user.password,
         phoneNum: user.phoneNum,
         address: user.address,
         token: 'jwt-token',

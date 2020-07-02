@@ -19,3 +19,24 @@
   vertical-align: top;
   margin-left: -10px;
 }
+
+.cart-icon {
+  position: relative;
+  bottom: -8px;
+}
+
+.navbar {
+  min-height: 30px;
+}
+
+.navbar-brand {
+  padding: 0 5px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.logo-title {
+  font-family: "Tangerine",
+    cursive, sans-serif;
+  font-size: 1.50rem;
+}

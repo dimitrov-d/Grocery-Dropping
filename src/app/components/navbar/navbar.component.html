@@ -1,7 +1,11 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary sticky-top" [containerInside]="false">
 
   <mdb-navbar-brand><a class="navbar-brand" routerLink="/">
-      <i style='font-family:"Tangerine", cursive, sans-serif; font-size: 1.50rem;'>GROCERY DROPPING</i></a>
+      <mdb-icon fas icon="cart-arrow-down fa-2x" class="cart-icon"></mdb-icon>
+      <i class="logo-title">
+        GROCERY
+        DROPPING</i>
+    </a>
   </mdb-navbar-brand>
 
   <links>
@@ -29,8 +33,7 @@
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           <mdb-icon fas icon="user"></mdb-icon>Profile<span class="caret"></span>
         </a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary dropdown-menu-right" role="menu"
-          style="z-index: 99999 !important;">
+        <div class="dropdown-menu dropdown dropdown-primary dropdown-menu-right" role="menu">
           <b><span class="dropdown-item" style="color: #4285F4">
               {{currentUser.firstName}}
               {{currentUser.lastName}}</span></b>
