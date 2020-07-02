@@ -35,6 +35,9 @@ export class CheckoutComponent implements OnInit {
       });
 
     this.date.setDate(this.date.getDate() + 1);
+    this.date.setHours(8);
+    this.date.setMinutes(0);
+    console.log(this.date);
   }
 
   ngOnInit() {
