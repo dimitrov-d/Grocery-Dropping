@@ -27,6 +27,7 @@
             [ngClass]="{ 'is-invalid': submitted && controls.address.errors }" />
           <div *ngIf="submitted && controls.address.errors" class="invalid-feedback">
             <div *ngIf="controls.address.errors.required">Address is required</div>
+            <div *ngIf="controls.address.errors.minlength">Address must be at least 6 characters</div>
           </div>
         </div>
         <div class="form-group">
@@ -35,6 +36,7 @@
             [ngClass]="{ 'is-invalid': submitted && controls.email.errors }" />
           <div *ngIf="submitted && controls.email.errors" class="invalid-feedback">
             <div *ngIf="controls.email.errors.required">Email is required</div>
+            <div *ngIf="controls.email.errors.email">Invalid E-mail format</div>
           </div>
         </div>
         <div class="form-group">
@@ -43,6 +45,7 @@
             [ngClass]="{ 'is-invalid': submitted && controls.phoneNum.errors }" />
           <div *ngIf="submitted && controls.phoneNum.errors" class="invalid-feedback">
             <div *ngIf="controls.phoneNum.errors.required">Phone Number is required</div>
+            <div *ngIf="controls.phoneNum.errors.pattern">Phone Number must have at least 6 characters</div>
           </div>
         </div>
         <div class="form-group">

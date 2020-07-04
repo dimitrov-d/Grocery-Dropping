@@ -23,6 +23,8 @@
     [ngClass]="{ 'is-invalid': submitted && controls.email.errors }" />
   <div *ngIf="submitted && controls.email.errors" class="invalid-feedback">
     <div *ngIf="controls.email.errors.required">E-mail is required</div>
+        <div *ngIf="controls.email.errors.email">Invalid E-mail format</div>
+
   </div>
 
   <input type="password" class="form-control mb-4" placeholder="Password" formControlName="password"
@@ -43,7 +45,7 @@
     [ngClass]="{ 'is-invalid': submitted && controls.phoneNum.errors }" />
   <div *ngIf="submitted && controls.phoneNum.errors" class="invalid-feedback">
     <div *ngIf="controls.phoneNum.errors.required">Phone Number is required</div>
-    <div *ngIf="controls.phoneNum.errors.minlength">Phone Number must be at least 6 characters</div>
+    <div *ngIf="controls.phoneNum.errors.pattern">Phone Number must be at least 6 characters</div>
   </div>
 
 

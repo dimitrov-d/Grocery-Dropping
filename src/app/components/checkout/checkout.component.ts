@@ -37,7 +37,6 @@ export class CheckoutComponent implements OnInit {
     this.date.setDate(this.date.getDate() + 1);
     this.date.setHours(8);
     this.date.setMinutes(0);
-    console.log(this.date);
   }
 
   ngOnInit() {
@@ -45,7 +44,7 @@ export class CheckoutComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phoneNum: ['', [Validators.required, Validators.minLength(6)]],
+      phoneNum: ['',[Validators.required, Validators.pattern('^[0-9]{6,12}$')]],
       address: ['', [Validators.required, Validators.minLength(6)]],
       datetime: ['', Validators.required],
     });
