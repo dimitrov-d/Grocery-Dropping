@@ -9,7 +9,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { ProductsComponent } from './components/products/products.component';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CommonModule } from '@angular/common';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
@@ -53,6 +53,7 @@ registerLocaleData(localeSl, 'sl');
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     Ng5SliderModule,
+    CommonModule
   ],
   bootstrap: [AppComponent],
   exports: [RouterModule],

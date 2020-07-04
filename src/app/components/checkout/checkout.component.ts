@@ -12,7 +12,7 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
-  cart_items: Observable<any[]>;
+  cartItems: Observable<any[]>;
   total: number;
   totalPrice: number;
   checkoutForm: FormGroup;
@@ -26,7 +26,7 @@ export class CheckoutComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthenticationService
   ) {
-    this.cart_items = this.cart.getItems();
+    this.cartItems = this.cart.getItems();
     db.collection('/cart')
       .valueChanges()
       .subscribe((products) => {
@@ -53,11 +53,11 @@ export class CheckoutComponent implements OnInit {
   }
 
   getTotalPrice(products: any) {
-    let current_price = 0;
+    let currentPrice = 0;
     for (let i = 0; i < products.length; i++) {
-      current_price += products[i].quantity * products[i].price;
+      currentPrice += products[i].quantity * products[i].price;
     }
-    this.totalPrice = current_price;
+    this.totalPrice = currentPrice;
   }
 
   get controls() {

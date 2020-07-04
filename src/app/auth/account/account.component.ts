@@ -68,12 +68,12 @@ export class AccountComponent implements OnInit {
           if (!localStorage.getItem('currentUser')) {
             sessionStorage.setItem(
               'currentUser',
-              JSON.stringify(this.accountForm.value))
+              JSON.stringify(this.accountForm.value));
           }
           else {
             localStorage.setItem(
               'currentUser',
-              JSON.stringify(this.accountForm.value))
+              JSON.stringify(this.accountForm.value));
           }
           this.authService.currentUserSubject.next(this.accountForm.value);
           this.loading = false;

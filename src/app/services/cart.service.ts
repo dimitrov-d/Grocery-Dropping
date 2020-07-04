@@ -37,16 +37,16 @@ export class CartService {
   }
 
   updateTotalPrice(products: any) {
-    let current_price = 0;
+    let currentPrice = 0;
     for (let i = 0; i < products.length; i++) {
-      current_price += products[i].quantity * products[i].price;
+      currentPrice += products[i].quantity * products[i].price;
     }
-    return current_price;
+    return currentPrice;
   }
 
-  saveOrder(cart_prods, totalSaved: number) {
+  saveOrder(cartProds, totalSaved: number) {
     const prods = [];
-    cart_prods.forEach((prod) => {
+    cartProds.forEach((prod) => {
       prods.push(prod);
     });
 

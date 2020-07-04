@@ -14,11 +14,11 @@ import { FilterService } from 'src/app/services/filter.service';
 export class ProductsComponent {
   products: Observable<any[]>;
   categories = Object.values(Category);
-  current_categ: string;
-  current_market: string;
+  currentCategory: string;
+  currentMarket: string;
   markets = ['Hofer', 'Lidl', 'Mercator'];
-  minPrice: number = 0;
-  maxPrice: number = 3;
+  minPrice = 0;
+  maxPrice = 5;
 
   constructor(
     private db: AngularFirestore,
@@ -26,7 +26,7 @@ export class ProductsComponent {
     public filterService: FilterService
   ) {
     this.products = this.filterService.getProducts();
-    this.current_categ = Category.All;
+    this.currentCategory = Category.All;
   }
 
   toggleHeart(index) {
@@ -34,26 +34,26 @@ export class ProductsComponent {
   }
 
   filterByCategory(category) {
-    this.current_market = null;
-    this.current_categ = category;
+    this.currentMarket = null;
+    this.currentCategory = category;
     this.products = this.filterService.filterByCategory(category);
   }
 
   filterByMarket(market) {
-    this.current_categ = null;
-    this.current_market = market;
+    this.currentCategory = null;
+    this.currentMarket = market;
     this.products = this.filterService.filterByMarket(market);
   }
 
   filterProducts(filter: string) {
-    this.current_categ = null;
-    this.current_market = null;
+    this.currentCategory = null;
+    this.currentMarket = null;
     this.products = this.filterService.filterByName(filter);
   }
 
   filterByPrice() {
-    this.current_categ = null;
-    this.current_market = null;
+    this.currentCategory = null;
+    this.currentMarket = null;
     this.products = this.filterService.filterByPrice(
       this.minPrice,
       this.maxPrice

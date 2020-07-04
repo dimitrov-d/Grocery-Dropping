@@ -10,12 +10,12 @@
           <th class="text-left">Products</th>
           <th class="text-center">Prices</th>
           <th class="text-center">Total</th>
-          <th class="text-center">Add</th>
-          <th class="text-center">Delete</th>
+          <th class="text-center"></th>
+          <th class="text-center"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of saved_items | async;">
+        <tr *ngFor="let item of savedItems | async;">
           <td>
             <div *ngFor="let prod of item.prods" class="text-left">
               {{prod.name}} x {{prod.quantity}}
@@ -38,6 +38,6 @@
         <td *ngFor="let i of [0,1,2,3,4]"></td>
       </tbody>
     </table>
-    <a *ngIf="savedTotal!==0" class="btn btn-danger mt-4" style="color: white;" (click)="clearOrders()">Clear orders</a>
+    <a *ngIf="savedTotal!==0" class="btn btn-danger mt-4" routerLink="/" (click)="clearOrders()">Clear orders</a>
   </div>
 </div>

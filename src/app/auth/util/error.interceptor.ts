@@ -22,7 +22,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (err.status === 401) {
           // Auto-Logout if 401 response returned is returned
           this.authService.logout();
-          location.reload(true);
+          location.reload();
         }
 
         const error = err.error.message || err.statusText;

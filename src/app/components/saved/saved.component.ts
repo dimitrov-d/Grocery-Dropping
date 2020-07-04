@@ -9,12 +9,12 @@ import { SavedService } from 'src/app/services/saved.service';
   styleUrls: ['./saved.component.css'],
 })
 export class SavedComponent {
-  saved_items: Observable<any[]>;
+  savedItems: Observable<any[]>;
   savedTotal: number;
 
   constructor(private db: AngularFirestore, private saved: SavedService) {
-    this.saved_items = this.db.collection('/saved').valueChanges();
-    this.saved_items.subscribe((saved) => {
+    this.savedItems = this.db.collection('/saved').valueChanges();
+    this.savedItems.subscribe((saved) => {
       this.savedTotal = saved.length;
     });
   }
@@ -29,6 +29,6 @@ export class SavedComponent {
 
   clearOrders() {
     this.saved.clearOrders();
-    this.saved_items = null;
+    this.savedItems = null;
   }
 }

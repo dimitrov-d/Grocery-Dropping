@@ -71,7 +71,7 @@
           <h5 class="card-title">Order Summary</h5>
           <p class="card-text">You have {{ total }} items in your Shopping Cart.</p>
           <ul class="list-group list-group-flush">
-            <li *ngFor="let item of cart_items | async" class="list-group-item">
+            <li *ngFor="let item of cartItems | async" class="list-group-item">
               {{ item.quantity}} x {{ item.name }}
               <div class="float-right">
                 {{ item.price * item.quantity| currency:'EUR':'symbol'}}

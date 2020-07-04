@@ -51,7 +51,9 @@ export class BackendInterceptor implements HttpInterceptor {
       const user = users.find(
         (u) => u.email === email && u.password === password
       );
-      if (!user) { return error('E-mail or password is incorrect'); }
+      if (!user) {
+        return error('E-mail or password is incorrect');
+      }
       return ok({
         id: user.id,
         firstName: user.firstName,
@@ -89,7 +91,9 @@ export class BackendInterceptor implements HttpInterceptor {
     }
 
     function getUsers() {
-      if (!isLoggedIn()) { return unauthorized(); }
+      if (!isLoggedIn()) {
+        return unauthorized();
+      }
       return ok(users);
     }
 

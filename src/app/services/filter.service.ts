@@ -10,7 +10,7 @@ import { Options, LabelType } from 'ng5-slider';
 export class FilterService {
   options: Options = {
     floor: 0,
-    ceil: 3,
+    ceil: 5,
     tickStep: 0.2,
     translate: (value: number, label: LabelType): string => {
       switch (label) {
@@ -45,7 +45,9 @@ export class FilterService {
     if (category === Category.All) {
       return this.getProducts();
     } else if (category === Category.Favorites) {
-      if (!this.prodService.authorizeFavorites()) return;
+      if (!this.prodService.authorizeFavorites()) {
+        return;
+      }
       return this.db
         .collection('/products', (prod) => prod.where('favorited', '==', true))
         .valueChanges();

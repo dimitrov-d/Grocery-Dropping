@@ -9,16 +9,16 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent {
-  cart_items: Observable<any[]>;
+  cartItems: Observable<any[]>;
   total: number;
   totalPrice: number;
-  cart_prods: any[];
+  cartProds: any[];
   totalSaved: number;
 
   constructor(private db: AngularFirestore, private cart: CartService) {
-    this.cart_items = this.cart.getItems();
-    this.cart_items.subscribe((products) => {
-      this.cart_prods = products;
+    this.cartItems = this.cart.getItems();
+    this.cartItems.subscribe((products) => {
+      this.cartProds = products;
       this.totalPrice = this.cart.updateTotalPrice(products);
       this.total = products.length;
     });
@@ -30,11 +30,11 @@ export class CartComponent {
 
   clearCart() {
     this.cart.clearCart();
-    this.cart_items = null;
-    this.cart_prods = null;
+    this.cartItems = null;
+    this.cartProds = null;
   }
 
   saveOrder() {
-    this.cart.saveOrder(this.cart_prods, this.totalSaved);
+    this.cart.saveOrder(this.cartProds, this.totalSaved);
   }
 }

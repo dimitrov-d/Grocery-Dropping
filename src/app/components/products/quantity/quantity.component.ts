@@ -3,16 +3,15 @@ import { Product } from 'src/app/models/product';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
-  selector: 'product-quantity',
+  selector: 'app-product-quantity',
   templateUrl: './quantity.component.html',
   styleUrls: ['./quantity.component.css'],
 })
-export class QuantityComponent implements OnInit{
+export class QuantityComponent implements OnInit {
   @Input('product') product: Product;
   quantity: number;
 
-  constructor(private db: AngularFirestore) {
-  }
+  constructor(private db: AngularFirestore) {}
   ngOnInit() {
     this.getQuantity(this.product);
   }
