@@ -30,6 +30,8 @@ export class CartComponent {
 
   clearCart() {
     this.cart.clearCart();
+    this.cart_items = null;
+    this.cart_prods = null;
   }
 
   saveOrder() {

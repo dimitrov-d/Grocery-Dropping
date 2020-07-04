@@ -29,5 +29,6 @@ export class SavedComponent {
 
   clearOrders() {
     this.saved.clearOrders();
+    this.saved_items = null;
   }
 }

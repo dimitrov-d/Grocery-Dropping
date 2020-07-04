@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { ProductsService } from 'src/app/services/products.service';
-import { Options, LabelType } from 'ng5-slider';
+import { FilterService } from 'src/app/services/filter.service';
 
 @Component({
   selector: 'app-products',
@@ -19,26 +19,13 @@ export class ProductsComponent {
   markets = ['Hofer', 'Lidl', 'Mercator'];
   minPrice: number = 0;
   maxPrice: number = 3;
-  options: Options = {
-    floor: 0,
-    ceil: 3,
-    tickStep: 0.2,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return value + '&euro;';
-        case LabelType.High:
-          return value + '&euro;';
-        default:
-          return value + '&euro;';
-      }
-    },
-  };
+
   constructor(
     private db: AngularFirestore,
-    public prodService: ProductsService
+    public prodService: ProductsService,
+    public filterService: FilterService
   ) {
-    this.products = this.getProducts();
+    this.products = this.filterService.getProducts();
     this.current_categ = Category.All;
   }
 
@@ -47,66 +34,30 @@ export class ProductsComponent {
   }
 
   filterByCategory(category) {
-    if (category === Category.All) {
-      this.products = this.getProducts();
-    } else if (category === Category.Favorites) {
-      if (!this.prodService.authorizeFavorites()) return;
-      this.products = this.products = this.db
-        .collection('/products', (prod) => prod.where('favorited', '==', true))
-        .valueChanges();
-    } else {
-      this.products = this.db
-        .collection('/products', (prod) =>
-          prod.where('category', '==', category)
-        )
-        .valueChanges();
-    }
     this.current_market = null;
     this.current_categ = category;
+    this.products = this.filterService.filterByCategory(category);
   }
 
   filterByMarket(market) {
     this.current_categ = null;
     this.current_market = market;
-    this.products = this.db
-      .collection('/products', (prod) =>
-        prod.where('supermarket', '==', market)
-      )
-      .valueChanges();
+    this.products = this.filterService.filterByMarket(market);
   }
 
   filterProducts(filter: string) {
     this.current_categ = null;
     this.current_market = null;
-    if (!filter) {
-      this.products = this.getProducts();
-    } else {
-      this.products = this.db
-        .collection(
-          '/products',
-          (prod) =>
-            prod
-              .where('name', '>=', filter)
-              .where('name', '<=', filter + '\uf8ff') // Unicode range to be able to search by substring
-        )
-        .valueChanges();
-    }
+    this.products = this.filterService.filterByName(filter);
   }
 
   filterByPrice() {
     this.current_categ = null;
     this.current_market = null;
-    this.products = this.db
-      .collection('/products', (prod) =>
-        prod
-          .where('price', '>=', this.minPrice)
-          .where('price', '<=', this.maxPrice)
-      )
-      .valueChanges();
-  }
-
-  getProducts() {
-    return this.db.collection('/products').valueChanges();
+    this.products = this.filterService.filterByPrice(
+      this.minPrice,
+      this.maxPrice
+    );
   }
 
   addToCart(product: Product) {

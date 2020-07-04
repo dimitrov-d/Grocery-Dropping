@@ -50,6 +50,6 @@ export class QuantityComponent implements OnInit{
     this.db
       .collection('/cart', (ref) => ref.where('name', '==', name))
       .valueChanges()
-      .subscribe((prod: any) => (this.quantity = prod[0].quantity));
+      .subscribe((prod: any) => (this.quantity = prod[0]?.quantity));
   }
 }
