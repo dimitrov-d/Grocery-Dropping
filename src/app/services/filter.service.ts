@@ -61,9 +61,6 @@ export class FilterService {
   }
 
   filterByName(filter) {
-    if (!filter) {
-      return this.getProducts();
-    } else {
       return this.db
         .collection(
           '/products',
@@ -73,7 +70,6 @@ export class FilterService {
               .where('name', '<=', filter + '\uf8ff') // Unicode range to be able to search by substring
         )
         .valueChanges();
-    }
   }
 
   filterByPrice(min, max) {

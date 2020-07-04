@@ -14,7 +14,7 @@
         </a>
       </div>
       <input class="form-control mt-4 mb-3" type="text" placeholder="Search for a product" aria-label="Search"
-        (input)="filterProducts($event.target.value)">
+        (input)="filterByName($event.target.value)">
       <h6> Price Range</h6>
       <ng5-slider [(value)]="minPrice" [(highValue)]="maxPrice" [options]="filterService.options"
         (valueChange)="filterByPrice()">

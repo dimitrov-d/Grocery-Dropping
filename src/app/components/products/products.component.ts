@@ -34,21 +34,29 @@ export class ProductsComponent {
   }
 
   filterByCategory(category) {
-    this.currentMarket = null;
-    this.currentCategory = category;
-    this.products = this.filterService.filterByCategory(category);
+    this.resetFilters(category, null);
+    setTimeout(() => {
+      this.products = this.filterService.filterByCategory(category);
+    }, 50);
   }
 
   filterByMarket(market) {
-    this.currentCategory = null;
-    this.currentMarket = market;
-    this.products = this.filterService.filterByMarket(market);
+    this.resetFilters(null, market);
+    setTimeout(() => {
+      this.products = this.filterService.filterByMarket(market);
+    }, 50);
   }
 
-  filterProducts(filter: string) {
-    this.currentCategory = null;
-    this.currentMarket = null;
-    this.products = this.filterService.filterByName(filter);
+  filterByName(filter: string) {
+    if (!filter) {
+      this.currentCategory = Category.All;
+      this.products = this.filterService.getProducts();
+      return;
+    }
+    this.resetFilters(null, null);
+    setTimeout(() => {
+      this.products = this.filterService.filterByName(filter);
+    }, 50);
   }
 
   filterByPrice() {
@@ -62,5 +70,14 @@ export class ProductsComponent {
 
   addToCart(product: Product) {
     this.prodService.addToCart(product);
+  }
+
+  resetFilters(category?, market?) {
+    this.minPrice = 0;
+    this.maxPrice = 5;
+    setTimeout(() => {
+      this.currentCategory = category;
+      this.currentMarket = market;
+    }, 50);
   }
 }
