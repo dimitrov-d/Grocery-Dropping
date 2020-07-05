@@ -10,13 +10,13 @@
       <span>{{text}}</span>
     </div>
 
-    <ngb-datepicker *ngIf="pickup" [minDate]="date"></ngb-datepicker>
+    <ngb-datepicker (dateSelect)="dateIsSelected()" *ngIf="pickup" [minDate]="minDate"></ngb-datepicker>
     <div class="modal-footer text-center">
       <button type="button" class="btn btn-secondary mr-auto ml-2" data-dismiss="modal">Close</button>
       <a *ngIf="!pickup" type="button" class="btn btn-primary mr-2" routerLink="../checkout" data-dismiss="modal">Home
         Delivery</a>
       <button *ngIf="!pickup" type="button" class="btn btn-primary mr-2" (click)="setPickup()">Self pickup</button>
-      <button *ngIf="pickup" type="button" class="btn btn-success mr-2" data-dismiss="modal"
+      <button *ngIf="pickup" type="button" class="btn btn-success mr-2" data-dismiss="modal" [disabled]="!dateSelected"
         (click)="done()">Done</button>
     </div>
   </div>

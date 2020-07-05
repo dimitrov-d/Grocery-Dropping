@@ -11,7 +11,7 @@ export class CartService {
     private db: AngularFirestore,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    public toastr: ToastrService
   ) {}
 
   getItems() {
